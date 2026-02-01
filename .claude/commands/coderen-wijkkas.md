@@ -1,0 +1,122 @@
+# coderen-wijkkas
+
+Input: $ARGUMENTS
+
+## Doel
+
+Bepaal de juiste grootboekrekening voor nieuwe boekingen van de wijkkas op basis van omschrijving en tegenpartij.
+
+## Gebruik
+
+```
+/coderen-wijkkas SKG Collect Batch 1674, SKG COLLECT
+/coderen-wijkkas collectebonnen 5x wit, J. de Vries
+```
+
+Of plak meerdere regels:
+```
+/coderen-wijkkas
+gift wijkkas, Hr Van Lambalgen
+Kerkdienst Gemist factuur sept, Kerkdienst Gemist B.V.
+```
+
+## Coderingsregels
+
+### Opbrengsten
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 73 | Reservering Legaten | legaat, nalatenschap |
+| 162 | Te betalen kosten Lichtjestocht | Lichtjestocht (kosten/bijdrage) |
+| 170 | Verkoop collectebonnen | collectebonnen (verkoop), bonnen bestelling |
+| 171 | Afdracht collectebonnen | doorzendcollecte (van exploitatie) |
+| 205 | Doorzendcollectes BK | doorzendcollecte, Thermo Libanon, diaconie (doorzending) |
+| 210 | Giften wijkkas | gift, bijdrage wijkkas, PWG De Lichtbron, maandelijkse gift |
+| 215 | Doorzendgiften | koffiepotje (opbrengst) |
+| 220 | Collecte voor de wijkkas | SKG Collect, collecte wijkkas, 2e collecte |
+| 265 | Subsidies Kerktuin | Oranje Fonds, NLdoet, subsidie kerktuin |
+| 290 | Overige baten | ondersteuning activiteiten, gemeenschapsactiviteiten, sponsoring, contante schenking |
+
+### Kosten wijkkerkenraad en predikant
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 300 | Kosten wijkkerkenraad | maaltijd kerkenraad, Mrs. Italy |
+| 301 | Kosten scribaat en predikant | declaratie predikant, pastoraat |
+| 302 | Kosten drukwerk | drukkosten, Practicum Print, Laposta, najaarsbrief, paasnummer, flyers |
+| 303 | Abonnementen | VBK media, Woord en Dienst, Ouderlingenblad, Liedboek online |
+| 304 | Kosten vrijwilligers | vrijwilligersvergoeding, organisten |
+| 305 | Bankkosten | bankkosten, portokosten |
+| 307 | Kosten Internet/telefoon en website | Micro-Projects, HBBZ, Argeweb, Webheld, Schaapsound, wifi |
+
+### Kosten eredienst
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 311 | Kosten eredienst | bloemen (declaratie), avondmaalwijn, Fa. W. van Oosterom, kaarsen eredienst |
+| 312 | Cantorij en koren | cantorij, koor |
+| 314 | Kosten kerktelefoon/televisie | Kerkdienst Gemist |
+| 319 | Overige kosten eredienst | avondmaalbekertjes, avondmaalvuller |
+
+### Kosten activiteiten
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 323 | Kosten lichtjestocht | lichtjestocht (kosten) |
+| 329 | Overige kosten gemeente activiteiten | ISERO (materiaal), kerststal, Beukers Bouwt |
+| 332 | Maaltijden ouderen | driekoningenlunch, 3K lunch, senioren lunch, Cafetaria Jan Kruis, DaBa Hummen |
+| 333 | Attenties bij verjaardagen e.d. | bloemen sectie, Flyerzone, attenties sectiewerk |
+| 334 | Kerstattenties | kerst presentje, kerstviering senioren |
+
+### Overige kosten
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 360 | Overige diverse kosten | Piano Select, jeugdruimte, theelichtglazen, parkeervergunning, training, drumstel |
+| 365 | Kerktuin | kerktuin, Anneke Beemer, TOMA Bloemenservice, Puik tuincentrum, Smits tuinen, compost, gieters, regentonnen |
+| 370 | Paaskaars | paaskaars, BOCA Kaarsengroep, jubelkaars |
+
+### Bijdragen cadeaus (tijdelijke codes)
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 390 | Bijdrage cadeau ds. Hillegonda Ploeger | cadeau Ploeger, kado Hillegonda, afscheid Ploeger |
+| 392 | Kerkbalans (naar PGH) | kerkbalans, vrijwillige vaste bijdrage (naar PGH) |
+| 395 | Bijdrage cadeau Wilma van der Burg | cadeau Wilma, afscheid Wilma |
+| 400 | Bijdrage cadeau Heleen Weimar | cadeau Heleen, afscheid Weimar |
+| 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
+| 405 | Bijdrage cadeau Oane Reitsma | cadeau Oane, afscheid Reitsma |
+
+### Interne boekingen
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 199 | Kruisposten | correctie, kruispost, foutief geboekt |
+
+## Prioriteit matching
+
+1. **Specifieke namen eerst** - SKG Collect, Kerkdienst Gemist, specifieke leveranciers
+2. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
+3. **Cadeau-codes** - Let op de specifieke persoonsnaam (Ploeger, Wilma, Heleen, Oane)
+4. **Bij twijfel** - Vraag om verduidelijking, geef opties
+
+## Output formaat
+
+Voor elke boeking, geef:
+```
+[CODE] [NAAM] | omschrijving | tegenpartij
+```
+
+Voorbeeld:
+```
+220 Collecte voor de wijkkas | SKG Collect Batch 1674 | SKG COLLECT
+170 Verkoop collectebonnen | collectebonnen 5x wit | J. de Vries
+210 Giften wijkkas | gift wijkkas | Hr Van Lambalgen
+```
+
+## Bij onduidelijkheid
+
+Als een boeking niet duidelijk past:
+- Geef de meest waarschijnlijke optie(s) met vraagteken
+- Vraag om bevestiging of extra context
+- Let extra op: gift (210) vs. collecte (220) vs. ondersteuning activiteiten (290)

@@ -1,0 +1,21 @@
+{
+  "comment": "Configuratie voor bankafschrift SKG: IBAN's en namen anonimiseren",
+  "columns": {
+    "Rekeningnummer begunstigde": "code",
+    "Naam begunstigde": "code"
+  },
+  "remove": [
+    "Jaar rekeningafschrift",
+    "RekeningNummer Rekeninghouder",
+    "Valuta",
+    "Adres begunstigde",
+    "Woonplaats begunstigde",
+    "Kenmerk",
+    "EndToEndId",
+    "BatchInfoId",
+    "MandaatId",
+    "FoutCode",
+    "FoutOmschrijving",
+    "BankTransactieCode"
+  ]
+}

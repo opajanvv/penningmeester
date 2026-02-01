@@ -1,0 +1,13 @@
+{
+  "comment": "Configuratie voor ledenlijst CSV: alle persoonsgegevens anonimiseren",
+  "columns": {
+    "Naam": "code",
+    "E-mail": "code",
+    "Telefoon": "code"
+  },
+  "remove": [
+    "Adres",
+    "IBAN",
+    "Opmerkingen"
+  ]
+}

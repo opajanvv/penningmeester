@@ -1,0 +1,46 @@
+# Sheets van Tjerk
+
+Tjerk beheert twee sheets voor de exploitatie die samenhangen met de hoofdadministratie.
+
+## Debiteuren-sheet
+
+**Locatie**: Google Drive `[jaar]/administratie/exploitatie/Debiteuren [jaar].xlsx`
+
+Bevat verstuurde verhuurfacturen.
+
+**Wekelijkse update**:
+1. Check mutaties exploitatie-rekening sinds vorige update datum
+2. Datum betaling invoeren bij betaalde facturen
+3. Eventueel gele en rode markering weghalen
+4. Bovenin datum laatste update aanpassen
+
+**Doel**: Zo weet Tjerk welke facturen nog openstaan voor aanmaningen.
+
+## Koster-sheet
+
+**Locatie**: Dropbox van de koster (Edwin is eigenaar)
+
+Bevat:
+- Kasmutaties
+- Bestelde consumpties tijdens verhuur
+
+**Afrekening consumpties**:
+- Afhankelijk van het verhuurcontract worden consumpties:
+  - Door bezoekers zelf betaald (kas of pin), of
+  - Later via de verhuurfactuur afgerekend
+
+## Kas van de koster
+
+Er is een kas met contant geld beheerd door de koster. Gasten kunnen koffie/thee ook contant betalen. Vanuit deze kas worden ook boodschappen gedaan (door de koster) en die stopt het bonnetje in de kas.
+
+**Maandafsluiting**:
+- Einde van iedere maand: Excel spreadsheet met kas en bonnetjes
+- Deze Excel staat in de Dropbox van de koster
+- Penningmeester kopieert deze naar Google Drive
+
+## Verbetermogelijkheid
+
+Tjerk's sheets inschuiven in de hoofdsheets van de exploitatierekening, zodat:
+- Handmatig overnemen van gegevens vervalt
+- Betaaldata automatisch zichtbaar zijn
+- Eén bron van waarheid ontstaat
