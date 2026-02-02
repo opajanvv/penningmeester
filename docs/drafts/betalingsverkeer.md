@@ -4,6 +4,8 @@
 
 - **SKG Online** (Rabobank)
 
+Blabla bla  **BLA!!**
+
 ## Werkwijze
 
 De penningmeester werkt wekelijks aan betalingen:
