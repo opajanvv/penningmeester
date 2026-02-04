@@ -38,5 +38,5 @@ Kosten betreffende exploitatie kerk:
 
 ## Zie ook
 
-- Declaraties: `declaraties.md`
-- Wekelijkse taken: `wekelijkse-taken.md`
+- Declaraties: `../drafts/declaraties.md`
+- Wekelijkse taken: `../checklists/wekelijkse-taken.md`

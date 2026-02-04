@@ -1,27 +1,27 @@
 # Vergoedingen musici en organisten
 
-## Organisten met vast contract
+## Musici met vast contract
 
-De volgende organisten hebben een vast contract met PgH. De penningmeester van De Lichtbron ziet deze kosten niet:
+De volgende musici hebben een vast contract met PgH. De penningmeester van De Lichtbron ziet deze kosten niet:
 
-- **Ies**
-- **Klaas**
-- **Arno**
-- **Marlene**
+- **Ies Nijman** (organist)
+- **Klaas de Haan** (organist)
+- **Arno Rog** (cantor)
+- **Marlene Erdmann** (cantor)
 
 ## Vrijwilligersvergoeding (via wijkkas)
 
 Andere organisten en gastmusici krijgen een vrijwilligersvergoeding uit de wijkkas:
 
-- Johannes
-- Annerose
-- Jan (penningmeester zelf)
+- Johannes Zwart
+- Annerose Korporaal
+- Jan van Veldhuizen
 
 Bij het uitnodigen van een gastmusicus: vraag wat de verwachte vergoeding is.
 
 ## Geen vergoeding
 
-- **Band RPM** (met Jessica) - komt voort uit de Regenboogkerk, instrumenten zijn betaald door de kerk
+- **Band RPM** (met Jessica Rebel) - komt voort uit de Regenboogkerk, instrumenten zijn betaald door de kerk
 
 ## Achtergrond
 
