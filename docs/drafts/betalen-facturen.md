@@ -1,10 +1,8 @@
-# Betalingsverkeer
+# Betalen facturen
 
 ## Bankomgeving
 
 - **SKG Online** (Rabobank)
-
-Blabla bla  **BLA!!**
 
 ## Werkwijze
 
@@ -18,7 +16,7 @@ De penningmeester werkt wekelijks aan betalingen:
    - Let op: kies de juiste rekening!
 3. **Betaalopdracht verzenden** (anders blijft deze staan)
    - Opdracht wordt gemarkeerd als volledig getekend
-4. **Mail archiveren**: van Inbox naar label `_Betaald [jaar]`
+4. **Mail archiveren**: verplaats naar map `[jaar]/Betaalde facturen`
 
 **Tip**: Zet de uitvoerdatum op de laatste werkdag voor de uiterste betaaldatum.
 
@@ -36,6 +34,7 @@ Kosten betreffende exploitatie kerk:
 - Kerkdienst Gemist
 - Rekeningen voor de tuin
 - Rekeningen voor onderhoud gebouw → doorsturen naar Theo van Doorn (financien@pknhilversum.nl)
+  - Deze emails verplaatsen naar map `[jaar]/Door naar PgH`
 
 ## Zie ook
 

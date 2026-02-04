@@ -14,6 +14,9 @@
 ### Sheets (s01)
 - [ ] **s01 - Coderingssheet maken voor VLOOKUP**: Maak een Google Sheet met twee kolommen (code, omschrijving) op basis van `docs/referentie/coderingsschema.md`. Doel: gebruiken als bron voor VLOOKUP formules in de boekhouding sheets.
 
+### Sheets (s02)
+- [⚠] **s02 - Onderste rijen Journaal naar boven**: Uitzoeken of de onderste rijen in de tabbladen 'Journaal' van de sheets voor Wijkkas en Exploitatie naar boven gehaald kunnen worden.
+
 ### Uitzoeken (u01-u16)
 - [ ] **u01 - Collecte afstorten uitzoeken**: Hoe gaat het afstorten van collectegeld nu? (4-6x per jaar volgens overdracht Koos)
 - [ ] **u02 - Parkeervergunning uitzoeken**: Beheer maatschappelijke parkeervergunning. Gekoppeld aan parkeren@delichtbron.nl. Betaald tot 30 juni 2026.

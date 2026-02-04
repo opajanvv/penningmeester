@@ -128,10 +128,10 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
 | 390 | Bijdrage cadeau ds. Hillegonda Ploeger | | Lichtbron |
-| 392 | Kerkbalans (naar PGH) | | Lichtbron |
+| 392 | Kerkbalans (naar PgH) | | Lichtbron |
 | 395 | Bijdrage cadeau Wilma van der Burg | | Lichtbron |
 | 400 | Bijdrage cadeau Heleen Weimar | | Lichtbron |
-| 402 | Wijkkas naar PGH | Kinderkoor | Lichtbron |
+| 402 | Wijkkas naar PgH | Kinderkoor | Lichtbron |
 | 405 | Bijdrage cadeau Oane Reitsma | | Lichtbron |
 
 ---
