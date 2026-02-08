@@ -3,7 +3,7 @@
 ## Openstaande taken
 
 ### Begroting (b01)
-- [→] **b01 - Begroting voor Wijkkas maken**: Maak een eigen begroting voor de Wijkkas administratie aan de hand van twee bestaande voorstellen:
+- [✓] **b01 - Begroting voor Wijkkas maken**: Maak een eigen begroting voor de Wijkkas administratie aan de hand van twee bestaande voorstellen:
   - `Begroting 2026 invulsheet begroting voor De Lichtbron deze is gemaakt door Koos.xlsx`
   - `Begroting 2026 wijkkas.xlsx`
   - Beide bestanden staan in `docs/begroting/`

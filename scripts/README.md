@@ -29,4 +29,4 @@ python scripts/anonymize_csv.py deanonymize anonymized.csv restored.csv \
 
 Zie `config-voorbeelden/` voor voorbeelden van configuratiebestanden.
 
-Zie `../docs/processen/csv-anonimiseren-voor-ai.md` voor uitgebreide documentatie.
+Zie `../processen/bankafschriften-coderen.md` voor het volledige stappenplan.
