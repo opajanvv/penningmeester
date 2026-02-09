@@ -1,11 +1,21 @@
 /**
  * Imports CSVs alphabetically.
  * Uses Sheet locale settings to handle semicolons and commas automatically.
+ *
+ * Vereist Script Properties:
+ *   importFolderId      - Google Drive map met nieuwe CSV's
+ *   processedFolderId   - Google Drive map voor verwerkte CSV's
  */
 function importCSV() {
-  const folderId = '1qYuhNpnDJvzhZC9KVec3K-V89toiJmzG';
-  const processedFolderId = '1dASRrGOE3bgGkeXsU9ICxdnErmTmXGla';
+  var props = PropertiesService.getScriptProperties();
+  const folderId = props.getProperty('importFolderId');
+  const processedFolderId = props.getProperty('processedFolderId');
   const sheetName = 'SKG';
+
+  if (!folderId || !processedFolderId) {
+    SpreadsheetApp.getUi().alert("Script Properties 'importFolderId' en/of 'processedFolderId' niet ingesteld.");
+    return;
+  }
 
   const folder = DriveApp.getFolderById(folderId);
   const files = folder.getFilesByType(MimeType.CSV);
