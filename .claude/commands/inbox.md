@@ -9,7 +9,6 @@
 
 ## Instructies
 
-- Lees eerst het bestand `docs/PLAN.md` grondig door en houd je aan de werkwijze en afspraken die daar beschreven staan.
 - Verwerk standaard **alle** nieuwe bestanden in `inbox/`, zonder dat Jan hoeft te prioriteren.
 - Groepeer alleen bestanden die duidelijk bij elkaar horen; als de samenhang onduidelijk is:
   - stel **altijd eerst gerichte vragen** aan Jan,

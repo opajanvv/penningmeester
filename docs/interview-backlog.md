@@ -1,24 +1,8 @@
-# Drafts
-
-Conceptdocumenten die klaar zijn om gepubliceerd te worden naar `docs/`.
-
-Gebruik `/publish` om een draft te reviewen en naar de definitieve locatie te verplaatsen.
-
-## Beschikbare drafts
-
-- `begroting.md` - Begrotingsproces
-- `collectebonnen.md` - Collectebonnen beheer
-- `declaraties.md` - Declaratieproces
-- `google-workspace.md` - Google Workspace en Sheets
-- `jaarrekening.md` - Jaarrekeningproces
-- `musici-vergoedingen.md` - Vergoedingen musici en organisten
-- `rekeningen.md` - Rekeningen en facturen
-
-## Te interviewen onderwerpen
+# Interview backlog
 
 Onderwerpen voor `/interview`. Aanpak: interview terwijl Jan de taak voor het eerst doet, zodat werkwijze en context tegelijk gedocumenteerd worden.
 
-### Open vragen bij bestaande drafts
+## Open vragen bij bestaande documentatie
 
 - **Begroting**: Deadline? Wie keurt goed? Vast format/template?
 - **Jaarrekening**: Deadline? Naar wie? Vast format? Relatie met kascontrole?
@@ -26,7 +10,7 @@ Onderwerpen voor `/interview`. Aanpak: interview terwijl Jan de taak voor het ee
 - **Collectebonnen**: Welke bonsoorten (kleuren, waarden)? Boeking-codes 170/171?
 - **Musici-vergoedingen**: Standaardbedrag vrijwilligersvergoeding? Uitbetalingsmethode?
 
-### Taken van Tjerk (overgenomen door Jan)
+## Taken van Tjerk (overgenomen door Jan)
 
 Documenteren door te interviewen terwijl Jan deze taken voor het eerst doet.
 
@@ -36,7 +20,7 @@ Documenteren door te interviewen terwijl Jan deze taken voor het eerst doet.
 - **Koster-sheet en kas**: Maandafsluiting kas, bonnetjes, kopieren naar Drive
 - **Catering/buffet administratie**: Hoe werkt de afrekening van consumpties bij verhuur?
 
-### Nieuwe onderwerpen
+## Nieuwe onderwerpen
 
 - **Kascontrole / kascommissie**: Hoe werkt de controle? Wie zit erin? (u14)
 - **Kerkbalans**: Actie vrijwillige bijdrage -- rol penningmeester?
