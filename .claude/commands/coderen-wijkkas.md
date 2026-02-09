@@ -33,10 +33,10 @@ Of zonder rijnummers voor losse invoer:
 | 162 | Te betalen kosten Lichtjestocht | Lichtjestocht (kosten/bijdrage) |
 | 170 | Verkoop collectebonnen | collectebonnen (verkoop), bonnen bestelling |
 | 171 | Afdracht collectebonnen | doorzendcollecte (van exploitatie) |
-| 205 | Doorzendcollectes BK | doorzendcollecte, Thermo Libanon, diaconie (doorzending) |
 | 210 | Giften wijkkas | gift, bijdrage wijkkas, PWG De Lichtbron, maandelijkse gift |
 | 215 | Doorzendgiften | koffiepotje (opbrengst) |
 | 220 | Collecte voor de wijkkas | SKG Collect, collecte wijkkas, 2e collecte |
+| 225 | Doorzichtcollecten | doorzendcollecte, Thermo Libanon, Nepal, diaconie (doorzending) |
 | 265 | Subsidies Kerktuin | Oranje Fonds, NLdoet, subsidie kerktuin |
 | 290 | Overige baten | ondersteuning activiteiten, gemeenschapsactiviteiten, sponsoring, contante schenking |
 

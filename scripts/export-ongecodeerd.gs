@@ -144,8 +144,8 @@ function verwerkImport(tekst) {
 }
 
 /**
- * Exporteert de laatst geimporteerde batch met definitieve codes.
- * Toont per regel: rijnummer|code|omschrijving, naam
+ * Exporteert regels met toelichting in kolom M (correcties en opgeloste vraagposten).
+ * Toont per regel: rijnummer|code|omschrijving, naam|toelichting
  * Klaar om te plakken in /leer-codering voor het bijwerken van patronen.
  */
 function exportGecodeerd() {
@@ -155,32 +155,27 @@ function exportGecodeerd() {
     return;
   }
 
-  var prop = PropertiesService.getScriptProperties().getProperty("laatsteBatch");
-  if (!prop) {
-    SpreadsheetApp.getUi().alert("Geen laatste batch gevonden. Draai eerst importGecodeerd.");
-    return;
-  }
-
-  var rijnummers = JSON.parse(prop);
   var data = sheet.getDataRange().getValues();
   var regels = [];
 
-  for (var i = 0; i < rijnummers.length; i++) {
-    var rij = rijnummers[i];
-    var rowData = data[rij - 1]; // array is 0-based
-    var code = rowData[0];       // kolom A
-    var omschrijving = rowData[6]; // kolom G
-    var naam = rowData[8];       // kolom I
+  for (var i = 1; i < data.length; i++) {
+    var toelichting = data[i][12]; // kolom M
+    if (!toelichting || String(toelichting).trim() === "") continue;
+
+    var rijnummer = i + 1;
+    var code = data[i][0];        // kolom A
+    var omschrijving = data[i][6]; // kolom G
+    var naam = data[i][8];        // kolom I
 
     var delen = [];
     if (omschrijving) delen.push(String(omschrijving).trim());
     if (naam) delen.push(String(naam).trim());
 
-    regels.push(rij + "|" + code + "|" + delen.join(", "));
+    regels.push(rijnummer + "|" + code + "|" + delen.join(", ") + "|" + String(toelichting).trim());
   }
 
   if (regels.length === 0) {
-    SpreadsheetApp.getUi().alert("Geen regels gevonden.");
+    SpreadsheetApp.getUi().alert("Geen regels met toelichting in kolom M gevonden.");
     return;
   }
 
@@ -196,5 +191,5 @@ function exportGecodeerd() {
     .setWidth(600)
     .setHeight(400);
 
-  SpreadsheetApp.getUi().showModalDialog(html, regels.length + " gecodeerde regels (laatste batch)");
+  SpreadsheetApp.getUi().showModalDialog(html, regels.length + " regels met correcties/toelichting");
 }

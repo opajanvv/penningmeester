@@ -10,15 +10,16 @@ Werk de patronen in een coderen-skill bij op basis van gecorrigeerde boekingen. 
 
 ```
 /leer-codering wijkkas
-23|305|Vaste kosten voor 2026 - Rekening-courant
-24|210|Wijkkas, M. Kuyvenhoven-Kok
-27|210|W. Triemstra e/o B. Triemstra-Wagenaar
-67|205|Nepal, J.C. Duim-van Harn
+27|210|W. Triemstra e/o B. Triemstra-Wagenaar|geen omschrijving, is gift
+67|205|Nepal, J.C. Duim-van Harn|doorzendcollecte voor Nepal
+50|300|declaratie borrel Communicatie-werkgroep, J van Veldhuizen|valt onder wijkkerkenraad
 ```
 
-Input komt uit het Apps Script `exportGecodeerd()` in de Google Sheet. Dit exporteert de laatste batch met definitieve codes na correctie door de penningmeester.
+Input komt uit het Apps Script `exportGecodeerd()` in de Google Sheet. Dit exporteert alleen regels waar de penningmeester een toelichting in kolom M heeft gezet (correcties en opgeloste vraagposten).
 
-Formaat per regel: `rijnummer|code|omschrijving, naam`
+Formaat per regel: `rijnummer|code|omschrijving, naam|toelichting`
+
+De toelichting van de penningmeester geeft context over waarom deze code is gekozen.
 
 Het eerste woord na `/leer-codering` geeft aan welke skill bijgewerkt moet worden:
 - `wijkkas` -> `.claude/commands/coderen-wijkkas.md`
@@ -33,8 +34,9 @@ Het eerste woord na `/leer-codering` geeft aan welke skill bijgewerkt moet worde
    - Nieuwe tegenpartij-namen
    - Nieuwe combinaties die tot een specifieke code leiden
 4. Identificeer **correcties** -- gevallen waar de bestaande patronen tot een verkeerde code zouden leiden.
-5. Stel concrete wijzigingen voor aan de patroontabellen in de skill.
-6. Voer de wijzigingen door na bevestiging door Jan.
+5. Als de coderen skill de juiste code oplevert, dan hoeft er **niets** te gebeuren.
+6. Als de coderen skill een andere code opelevert, Stel dan concrete wijzigingen voor aan de patroontabellen in de skill, zodat het volgende keer beter gaat.
+7. Voer de wijzigingen door na bevestiging door Jan.
 
 ## Wat niet aanpassen
 
@@ -44,10 +46,10 @@ Het eerste woord na `/leer-codering` geeft aan welke skill bijgewerkt moet worde
 
 ## Voorbeeld
 
-Als de input `67|205|Nepal, J.C. Duim-van Harn` bevat, en code 205 (Doorzendcollectes BK) heeft als patroon "doorzendcollecte, Thermo Libanon, diaconie (doorzending)", dan stel voor om "Nepal" toe te voegen:
+Als de input `67|205|Nepal, J.C. Duim-van Harn|doorzendcollecte voor Nepal` bevat, en code 205 (Doorzendcollectes BK) heeft als patroon "doorzendcollecte, Thermo Libanon, diaconie (doorzending)", dan stel voor om "Nepal" toe te voegen:
 
 ```
-| 205 | Doorzendcollectes BK | doorzendcollecte, Thermo Libanon, diaconie (doorzending), Nepal |
+| 225 | Doorzichtcollecten | doorzendcollecte, Thermo Libanon, diaconie (doorzending), Nepal |
 ```
 
 ## Belangrijk

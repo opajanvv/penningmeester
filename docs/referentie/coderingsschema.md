@@ -35,7 +35,6 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
-| 205 | Doorzendcollectes BK | Doorzendcollecte, Thermo Libanon, diaconie | Lichtbron |
 | 210 | Giften | Giften en legaten met algemeen doel | Standaard |
 | 215 | Doorzendgiften | Ontvangsten én uitgaven boeken; moet per einde jaar op nul lopen | Standaard |
 | 220 | Collecten | Volgens collecterooster | Standaard |
@@ -44,6 +43,17 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 | 240 | Rente | Rente vanuit centraal op basis van reserves per 1 januari | Standaard |
 | 265 | Subsidies Kerktuin | Oranje Fonds, NLdoet, subsidie kerktuin | Lichtbron |
 | 290 | Overige baten | | Standaard |
+
+### Toelichting: doorzendposten
+
+**Code 215 (Doorzichtgiften)** vs **Code 225 (Doorzichtcollecten)**
+
+Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op nul. Het verschil zit in de herkomst:
+
+| Code | Naam | Herkomst |
+|------|------|----------|
+| 215 | Doorzichtgiften | Losse giften (bv. koffiepotje) |
+| 225 | Doorzichtcollecten | Collectes (bv. Nepal, Thermo Libanon, diaconie) |
 
 ### Lasten - Algemene kosten (30x)
 
@@ -267,5 +277,5 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 ## Opmerkingen
 
 - Onderhoudscontracten vallen vanaf 2017 niet onder decentraal onderhoud (zie MJOB).
-- Doorzendgiften (215) en doorzendcollecten (225) moeten per einde jaar op nul lopen via overboeking naar balans/schulden.
+- Doorzichtgiften (215) en doorzichtcollecten (225): ontvang én uitgave boeken; einde jaar op nul via overboeking naar balans/schulden.
 - Rente van spaargelden belegd bij centraal wordt verantwoord in de wijkkas, niet in exploitatie.
