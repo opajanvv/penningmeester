@@ -29,12 +29,12 @@ Of zonder rijnummers voor losse invoer:
 
 | Code | Naam | Patroon |
 |------|------|---------|
-| 73 | Reservering Legaten | legaat, nalatenschap |
+| 73 | Reservering Legaten | legaat, nalatenschap (let op: "Erven" in naam betekent niet automatisch legaat) |
 | 162 | Te betalen kosten Lichtjestocht | Lichtjestocht (kosten/bijdrage) |
 | 170 | Verkoop collectebonnen | collectebonnen (verkoop), bonnen bestelling |
-| 171 | Afdracht collectebonnen | doorzendcollecte (van exploitatie) |
+| 171 | Afdracht collectebonnen | doorzendcollecte (van exploitatie), opbrengst collectebonnen (van PGH) |
 | 210 | Giften wijkkas | gift, bijdrage wijkkas, PWG De Lichtbron, maandelijkse gift |
-| 215 | Doorzendgiften | koffiepotje (opbrengst) |
+| 215 | Doorzendgiften | koffiepotje (opbrengst), Nepal (gift van persoon) |
 | 220 | Collecte voor de wijkkas | SKG Collect, collecte wijkkas, 2e collecte |
 | 225 | Doorzichtcollecten | doorzendcollecte, Thermo Libanon, Nepal, diaconie (doorzending) |
 | 265 | Subsidies Kerktuin | Oranje Fonds, NLdoet, subsidie kerktuin |
@@ -79,29 +79,20 @@ Of zonder rijnummers voor losse invoer:
 | 365 | Kerktuin | kerktuin, Anneke Beemer, TOMA Bloemenservice, Puik tuincentrum, Smits tuinen, compost, gieters, regentonnen |
 | 370 | Paaskaars | paaskaars, BOCA Kaarsengroep, jubelkaars |
 
-### Bijdragen cadeaus (tijdelijke codes)
-
-| Code | Naam | Patroon |
-|------|------|---------|
-| 390 | Bijdrage cadeau ds. Hillegonda Ploeger | cadeau Ploeger, kado Hillegonda, afscheid Ploeger |
-| 392 | Kerkbalans (naar PGH) | kerkbalans, vrijwillige vaste bijdrage (naar PGH) |
-| 395 | Bijdrage cadeau Wilma van der Burg | cadeau Wilma, afscheid Wilma |
-| 400 | Bijdrage cadeau Heleen Weimar | cadeau Heleen, afscheid Weimar |
-| 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
-| 405 | Bijdrage cadeau Oane Reitsma | cadeau Oane, afscheid Reitsma |
-
 ### Interne boekingen
 
 | Code | Naam | Patroon |
 |------|------|---------|
 | 199 | Kruisposten | correctie, kruispost, foutief geboekt |
+| 392 | Kerkbalans (naar PGH) | kerkbalans, vrijwillige vaste bijdrage (naar PGH) |
+| 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
 
 ## Prioriteit matching
 
 1. **Specifieke namen eerst** - SKG Collect, Kerkdienst Gemist, specifieke leveranciers
 2. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
-3. **Cadeau-codes** - Let op de specifieke persoonsnaam (Ploeger, Wilma, Heleen, Oane)
-4. **Bij twijfel** - Vraag om verduidelijking, geef opties
+3. **Geen of vage omschrijving** - Als er geen duidelijke omschrijving is, default naar gift (210)
+4. **Bij twijfel** - Geef code 200 (Vraagposten) met opties
 
 ## Output formaat
 
