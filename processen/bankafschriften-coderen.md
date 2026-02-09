@@ -1,54 +1,40 @@
 # Bankafschriften coderen
 
-Stappenplan om nieuwe bankafschriften te coderen met Claude. Persoonsgegevens worden geanonimiseerd voordat de data naar de cloud gaat.
+Stappenplan om nieuwe bankafschriften te coderen met Claude. Er zijn twee Apps Scripts in de Google Sheet die het proces ondersteunen. De broncode staat in `scripts/export-ongecodeerd.gs`.
 
-## 1. Exporteer uit Google Sheets
+## 1. Exporteer ongecodeerde regels
 
 1. Open de Google Sheet (Wijkkas of Exploitatie).
-2. Ga naar het tabblad **SKG**.
-3. **Bestand > Downloaden > Kommagescheiden waarden (.csv)**.
-4. Sla op als bijv. `inbox/wijkkas-skg.csv`.
+2. Draai het script **exportOngecodeerd** (via Uitbreidingen > Macro's, of via een knop).
+3. Het script filtert het Journaal op rijen met lege code (kolom A) en bron "SKG".
+4. Er verschijnt een dialoog met per regel: `rijnummer|omschrijving, naam`.
+5. Selecteer alles en kopieer.
 
-## 2. Anonimiseer
+## 2. Codeer met Claude
 
-```bash
-python scripts/anonymize_csv.py anonymize inbox/wijkkas-skg.csv inbox/wijkkas-anoniem.csv \
-  --config scripts/config-voorbeelden/skg.json \
-  --mapping inbox/wijkkas-mapping.json
-```
+1. Open Claude Code in dit project.
+2. Typ `/coderen-wijkkas` (of `/coderen-exploitatie`) en plak de gekopieerde regels.
+3. Claude geeft twee blokken output:
+   - **Leesbaar overzicht** -- per regel de code met toelichting, ter controle.
+   - **Import-blok** -- per regel `rijnummer|code|opmerking`, klaar voor import.
+4. Bij twijfelgevallen geeft Claude code **200** (Vraagposten) met een opmerking over de mogelijke codes.
 
-Dit vervangt namen en IBAN's door codes (`NAAM_001`, `REKENINGNUMMER_001`, etc.) en verwijdert overbodige kolommen. Omschrijvingen, datums en bedragen blijven intact.
+## 3. Importeer codes in de sheet
 
-Controleer de output: kijk of er geen persoonsgegevens meer in staan.
+1. Draai het script **importGecodeerd** in de Google Sheet.
+2. Er verschijnt een dialoog met een tekstveld.
+3. Kopieer het **import-blok** uit de Claude-output en plak het in het tekstveld.
+4. Klik **Importeren**.
+5. Het script zet de codes in kolom A. Bij code 200 komt de opmerking in kolom M.
 
-## 3. Codeer met Claude
+## 4. Controleer en corrigeer
 
-Open Claude Code in dit project en gebruik de juiste skill:
+1. Filter het Journaal op code **200** om de twijfelgevallen te zien.
+2. Lees de opmerking in kolom M en kies de juiste code.
+3. Controleer ook de overige codes steekproefsgewijs.
 
-- **Wijkkas**: `/coderen-wijkkas` en plak de inhoud van `wijkkas-anoniem.csv`
-- **Exploitatie**: `/coderen-exploitatie` en plak de inhoud
+## Gevoelige data
 
-Claude geeft per regel de grootboekcode terug op basis van de omschrijving en bekende patronen. Bij geanonimiseerde namen (bijv. `NAAM_003`) matcht Claude op de omschrijving.
+Het Journaal bevat geen IBAN's of adressen -- alleen namen, omschrijvingen en bedragen. Namen van tegenpartijen worden meegestuurd naar Claude omdat ze nodig zijn voor de codering (bijv. "Sligro" -> inkoop buffet, "Care" -> schoonmaak).
 
-## 4. Voer codes in de sheet
-
-Neem de codes van Claude over in de Google Sheet, in de kolom voor grootboekcodes.
-
-## 5. Deanonimiseer (optioneel)
-
-Als je de originele namen terug wilt koppelen aan het resultaat:
-
-```bash
-python scripts/anonymize_csv.py deanonymize inbox/wijkkas-anoniem.csv inbox/wijkkas-hersteld.csv \
-  --mapping inbox/wijkkas-mapping.json
-```
-
-## 6. Ruim op
-
-Verwijder de CSV-bestanden en het mapping-bestand uit `inbox/` als je klaar bent. Bewaar ze niet langer dan nodig.
-
-## Belangrijk
-
-- Upload nooit het originele (niet-geanonimiseerde) bestand naar een cloud-tool.
-- Bewaar het mapping-bestand **lokaal** -- zonder dit kun je niet terugdraaien.
-- Bij twijfel over een code: zie `docs/referentie/coderingsschema.md`.
+Bij twijfel over een code: zie `docs/referentie/coderingsschema.md`.

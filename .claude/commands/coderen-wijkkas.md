@@ -8,16 +8,19 @@ Bepaal de juiste grootboekrekening voor nieuwe boekingen van de wijkkas op basis
 
 ## Gebruik
 
-```
-/coderen-wijkkas SKG Collect Batch 1674, SKG COLLECT
-/coderen-wijkkas collectebonnen 5x wit, J. de Vries
-```
+Input komt uit het Apps Script `exportOngecodeerd()` in de Google Sheet.
+Elke regel heeft het formaat: `rijnummer|omschrijving, naam`
 
-Of plak meerdere regels:
 ```
 /coderen-wijkkas
-gift wijkkas, Hr Van Lambalgen
-Kerkdienst Gemist factuur sept, Kerkdienst Gemist B.V.
+23|Vaste kosten voor 2026 - Rekening-courant
+24|Wijkkas, M. Kuyvenhoven-Kok
+25|SKG Collect S265 - Batch 1688, SKG COLLECT
+```
+
+Of zonder rijnummers voor losse invoer:
+```
+/coderen-wijkkas gift wijkkas, Hr Van Lambalgen
 ```
 
 ## Coderingsregels
@@ -102,21 +105,38 @@ Kerkdienst Gemist factuur sept, Kerkdienst Gemist B.V.
 
 ## Output formaat
 
-Voor elke boeking, geef:
+Geef twee blokken output:
+
+### 1. Leesbaar overzicht
+
+Per regel: `rijnummer: CODE NAAM | omschrijving | tegenpartij`
+Bij twijfel: markeer met `?` en geef opties.
+
 ```
-[CODE] [NAAM] | omschrijving | tegenpartij
+23: 305 Bankkosten | Vaste kosten voor 2026 - Rekening-courant
+24: 210 Giften wijkkas | Wijkkas | M. Kuyvenhoven-Kok
+25: 220 Collecte voor de wijkkas | SKG Collect Batch 1688 | SKG COLLECT
+49: 200 Vraagposten | Erven mw NJ Ridder: nalatenschap (73) of gift (210)?
 ```
 
-Voorbeeld:
+### 2. Import-blok
+
+Na het overzicht, geef een code-blok met het import-formaat voor het Apps Script `importGecodeerd()`.
+Per regel: `rijnummer|code|opmerking`
+De opmerking is alleen nodig bij code 200 (twijfelgevallen).
+
 ```
-220 Collecte voor de wijkkas | SKG Collect Batch 1674 | SKG COLLECT
-170 Verkoop collectebonnen | collectebonnen 5x wit | J. de Vries
-210 Giften wijkkas | gift wijkkas | Hr Van Lambalgen
+23|305|
+24|210|
+25|220|
+49|200|Erven mw NJ Ridder: nalatenschap (73) of gift (210)?
 ```
 
-## Bij onduidelijkheid
+### Twijfelgevallen
 
 Als een boeking niet duidelijk past:
-- Geef de meest waarschijnlijke optie(s) met vraagteken
-- Vraag om bevestiging of extra context
+- Geef code **200** (Vraagposten)
+- Zet de toelichting met mogelijke codes in de opmerking
 - Let extra op: gift (210) vs. collecte (220) vs. ondersteuning activiteiten (290)
+
+Als er geen rijnummer in de input staat, geef alleen het leesbare overzicht zonder import-blok.

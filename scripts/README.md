@@ -1,32 +1,22 @@
-# Scripts voor penningmeester-documentatie
+# Scripts
 
-Deze map bevat praktische scripts voor het werk van de penningmeester.
+## export-ongecodeerd.gs
+
+Google Apps Script voor de Wijkkas/Exploitatie-sheets. Bevat twee functies:
+
+- **exportOngecodeerd()** -- exporteert ongecodeerde SKG-regels uit het Journaal als `rijnummer|omschrijving, naam`.
+- **importGecodeerd()** -- importeert gecodeerde regels (`rijnummer|code|opmerking`) terug in het Journaal.
+
+Zie `../processen/bankafschriften-coderen.md` voor het volledige stappenplan.
 
 ## anonymize_csv.py
 
-Script voor reversibele anonimisering van CSV-bestanden met persoonsgegevens.
+Script voor reversibele anonimisering van CSV-bestanden met persoonsgegevens. Wordt niet gebruikt bij het coderen (het Journaal bevat geen IBAN's), maar is beschikbaar voor wanneer je volledige SKG-exports verwerkt.
 
-### Installatie
-
-Geen externe dependencies nodig - gebruikt alleen Python standaardbibliotheek.
-
-### Gebruik
-
-**Anonimiseren:**
 ```bash
 python scripts/anonymize_csv.py anonymize input.csv output.csv \
-  --config scripts/config-voorbeelden/bankafschrift.json \
+  --config scripts/config-voorbeelden/skg.json \
   --mapping mapping.json
 ```
 
-**Terugdraaien:**
-```bash
-python scripts/anonymize_csv.py deanonymize anonymized.csv restored.csv \
-  --mapping mapping.json
-```
-
-### Configuratie
-
-Zie `config-voorbeelden/` voor voorbeelden van configuratiebestanden.
-
-Zie `../processen/bankafschriften-coderen.md` voor het volledige stappenplan.
+Zie `config-voorbeelden/` voor voorbeeldconfiguraties.
