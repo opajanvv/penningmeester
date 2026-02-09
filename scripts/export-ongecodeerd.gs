@@ -102,6 +102,7 @@ function verwerkImport(tekst) {
   var regels = tekst.trim().split("\n");
   var verwerkt = 0;
   var fouten = [];
+  var rijnummers = [];
 
   for (var i = 0; i < regels.length; i++) {
     var regel = regels[i].trim();
@@ -126,12 +127,74 @@ function verwerkImport(tekst) {
     if (code === 200 && opmerking) {
       sheet.getRange(rijnummer, 13).setValue(opmerking); // kolom M
     }
+    rijnummers.push(rijnummer);
     verwerkt++;
   }
+
+  // Sla geimporteerde rijnummers op voor exportGecodeerd
+  PropertiesService.getScriptProperties().setProperty(
+    "laatsteBatch", JSON.stringify(rijnummers)
+  );
 
   var resultaat = verwerkt + " regels verwerkt.";
   if (fouten.length > 0) {
     resultaat += "\n\nFouten:\n" + fouten.join("\n");
   }
   return resultaat;
+}
+
+/**
+ * Exporteert de laatst geimporteerde batch met definitieve codes.
+ * Toont per regel: rijnummer|code|omschrijving, naam
+ * Klaar om te plakken in /leer-codering voor het bijwerken van patronen.
+ */
+function exportGecodeerd() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Journaal");
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert("Tabblad 'Journaal' niet gevonden.");
+    return;
+  }
+
+  var prop = PropertiesService.getScriptProperties().getProperty("laatsteBatch");
+  if (!prop) {
+    SpreadsheetApp.getUi().alert("Geen laatste batch gevonden. Draai eerst importGecodeerd.");
+    return;
+  }
+
+  var rijnummers = JSON.parse(prop);
+  var data = sheet.getDataRange().getValues();
+  var regels = [];
+
+  for (var i = 0; i < rijnummers.length; i++) {
+    var rij = rijnummers[i];
+    var rowData = data[rij - 1]; // array is 0-based
+    var code = rowData[0];       // kolom A
+    var omschrijving = rowData[6]; // kolom G
+    var naam = rowData[8];       // kolom I
+
+    var delen = [];
+    if (omschrijving) delen.push(String(omschrijving).trim());
+    if (naam) delen.push(String(naam).trim());
+
+    regels.push(rij + "|" + code + "|" + delen.join(", "));
+  }
+
+  if (regels.length === 0) {
+    SpreadsheetApp.getUi().alert("Geen regels gevonden.");
+    return;
+  }
+
+  var tekst = regels.join("\n");
+
+  var html = HtmlService
+    .createHtmlOutput(
+      '<textarea id="output" style="width:100%;height:90%;font-family:monospace;font-size:13px;">'
+      + tekst.replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      + '</textarea>'
+      + '<script>document.getElementById("output").select();</script>'
+    )
+    .setWidth(600)
+    .setHeight(400);
+
+  SpreadsheetApp.getUi().showModalDialog(html, regels.length + " gecodeerde regels (laatste batch)");
 }
