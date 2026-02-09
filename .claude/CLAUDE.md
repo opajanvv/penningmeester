@@ -18,11 +18,14 @@
 
 ## Werkwijze en structuur
 
-- Documentatie en instructies worden stap voor stap opgebouwd als **Markdown-bestanden** in deze map.
-- Ruwe input (notities, schermafdrukken, exports, losse ideeën) gaat naar een **inbox-map op root-niveau** (`inbox/`) in dit project.
-- Voor uitzoektaken en lopende vragen is er een **map `taken/` op root-niveau**; de uitwerking daarvan kan later weer als ruwe input in `inbox/` terechtkomen.
-- **Belangrijk**: Als er iets in `inbox/` staat, gebruik dan eerst de `inbox` skill om deze te verwerken.
-- Help om deze ruwe input te ordenen en om te zetten naar **gestructureerde, doorzoekbare documentatie**.
-- De mappenstructuur mag later uitgebreid of aangepast worden als dat helpt om informatie beter terug te vinden.
+- Documentatie en instructies worden stap voor stap opgebouwd als **Markdown-bestanden** in `docs/`.
+- Schrijf direct naar de definitieve locatie in `docs/`. Vermijd tussenstappen (staging areas, draft-folders) die geen review toevoegen.
+- Ruwe input (notities, schermafdrukken, exports, losse ideeën) gaat naar `inbox/`. Als er iets in `inbox/` staat, gebruik dan eerst de `/inbox` skill om deze te verwerken.
+- Voor uitzoektaken en lopende vragen is er een map `taken/`.
+- De mappenstructuur mag uitgebreid of aangepast worden als dat helpt om informatie beter terug te vinden.
 - Bij het ordenen mag bestanden hernoemd en verplaatst worden, maar **de inhoud blijft altijd behouden**.
-- De concrete uitwerking van dit proces staat in `PLAN.md`.
+- Bij verplaatsen of verwijderen van bestanden: controleer verwijzingen in `.claude/commands/` en documentatie.
+
+## Scripts
+
+- Bij nieuwe scripts: gebruik configuratie (Script Properties, env vars) voor IDs en paden vanaf het begin, niet hardcoded waarden.
