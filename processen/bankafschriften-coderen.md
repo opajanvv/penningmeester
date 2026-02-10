@@ -1,6 +1,6 @@
 # Bankafschriften coderen
 
-Stappenplan om nieuwe bankafschriften te coderen met Claude. Er zijn twee Apps Scripts in de Google Sheet die het proces ondersteunen. De broncode staat in `scripts/codering.gs`.
+Stappenplan om nieuwe bankafschriften te coderen met Claude. Er zijn twee Apps Scripts in de Google Sheet die het proces ondersteunen. De broncode staat in `scripts/codering-wijkkas.gs` (met naammaskering) en `scripts/codering-exploitatie.gs` (zonder naammaskering).
 
 ## 1. Exporteer ongecodeerde regels
 
