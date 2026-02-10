@@ -162,6 +162,7 @@ function exportGecodeerd() {
   }
 
   var data = sheet.getDataRange().getValues();
+  var organisatieLijst = laadOrganisaties();
   var regels = [];
 
   for (var i = 1; i < data.length; i++) {
@@ -175,7 +176,12 @@ function exportGecodeerd() {
 
     var delen = [];
     if (omschrijving) delen.push(String(omschrijving).trim());
-    if (naam) delen.push(String(naam).trim());
+    if (naam) {
+      var naamStr = String(naam).trim();
+      if (naamStr) {
+        delen.push(isOrganisatie(naamStr, organisatieLijst) ? naamStr : "persoon");
+      }
+    }
 
     regels.push(rijnummer + "|" + code + "|" + delen.join(", ") + "|" + String(toelichting).trim());
   }
