@@ -17,6 +17,8 @@ Onderwerpen voor `/interview`. Aanpak: interview terwijl de penningmeester de ta
 
 ## Nieuwe onderwerpen
 
+- ~~**Exploitatie-inkomsten overzicht (facturen/kas/pin)**~~: Uitgewerkt tot verbeterplan in `taken/verbetering-exploitatie-sheet.md`. Pin-discrepantie verklaard (latency + transactiekosten Zettle). Bron: `taken/bronnen/notities-zettle-pin.md`
+
 - **Kascontrole / kascommissie**: Hoe werkt de controle? Wie zit erin? (u14)
 - **Kerkbalans**: Actie vrijwillige bijdrage -- rol penningmeester?
 - **ANBI-status**: Zijn er verplichtingen vanuit ANBI?
