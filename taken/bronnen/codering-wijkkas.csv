@@ -1,0 +1,71 @@
+code,omschrijving
+010,Vaste activa
+050,Algemene wijkreserve
+060,Wijkfonds
+073,Reservering Legaten
+100,Bankrekeningen
+110,Spaargelden
+150,Vorderingen
+160,Schulden
+162,Te betalen kosten Lichtjestocht
+170,Inkomsten collectebonnen
+171,Afdracht collectebonnen
+196,Verrekeningen
+198,Sluitrekening exploitatie
+199,Kruisposten
+210,Giften
+215,Doorzendgiften
+220,Collecten
+225,Doorzendcollecten
+230,Verjaardagsfonds
+240,Rente
+265,Subsidies Kerktuin
+290,Overige baten
+300,Wijkkerkenraad
+301,Scribaat
+302,Drukwerk
+303,Abonnementen
+304,Kosten vrijwilligers
+305,Bankkosten
+306,Administratie
+307,Internet en website
+308,Kosterij
+309,Overige kosten
+310,Werkgroep eredienst
+311,Kosten eredienst
+312,Cantorij en koren
+313,Koffie na de dienst
+314,Kerktelefoon/televisie
+315,Exposities
+319,Overige kosten eredienst
+320,Vorming en toerusting
+321,Gemeenteavonden
+322,Gemeenteweekenden
+323,Concerten / Lichtjestocht
+324,Contacten met derden
+325,Alpha cursussen
+329,Overige kosten gemeente-activiteiten
+330,Contactmiddagen/soos
+331,Uitstapjes
+332,Maaltijden
+333,Attenties bij verjaardagen
+334,Kerstattenties
+339,Overige kosten ouderenwerk
+340,Catechese
+341,Jongerendiensten
+342,Buitenevenementen
+343,Culturele evenementen
+344,Koren
+349,Overige kosten jongerenwerk
+350,Vitamine G
+356,Evangelisatiecommissie
+357,Zendingscommissie
+360,Diverse kosten
+365,Kerktuin
+370,Paaskaars
+390,Bijdrage cadeau ds. Hillegonda Ploeger
+392,Kerkbalans (naar PgH)
+395,Bijdrage cadeau Wilma van der Burg
+400,Bijdrage cadeau Heleen Weimar
+402,Wijkkas naar PgH
+405,Bijdrage cadeau Oane Reitsma
