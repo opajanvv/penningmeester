@@ -7,8 +7,6 @@ Dit overzicht combineert het officiële PKN-coderingsschema (Bijlage 7A) met de 
 
 Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 
-CSV-versies voor import in Google Sheets (VLOOKUP): `taken/bronnen/codering-wijkkas.csv` en `taken/bronnen/codering-exploitatie.csv`
-
 ---
 
 ## Wijkkas
