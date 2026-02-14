@@ -14,8 +14,9 @@ De penningmeester werkt wekelijks aan betalingen:
    - Voorbeeld: `20260107 - ElbertseVanVulpen - inv25700389.PDF`
 2. **Betaalopdracht invoeren** in SKG
    - Let op: kies de juiste rekening!
-3. **Betaalopdracht verzenden** (anders blijft deze staan)
-   - Opdracht wordt gemarkeerd als volledig getekend
+3. **Betaalopdracht accorderen** (anders blijft deze staan als concept)
+   - De penningmeester zet klaar én accordeert zelf (geen vier-ogen-principe)
+   - Na accorderen verwerkt SKG de betaling (eenmaal per dag, vermoedelijk 's middags)
 4. **Mail archiveren**: verplaats naar map `[jaar]/Betaalde facturen`
 
 **Tip**: Zet de uitvoerdatum op de laatste werkdag voor de uiterste betaaldatum.

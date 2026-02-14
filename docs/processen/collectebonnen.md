@@ -36,7 +36,7 @@ Als een bestelling per ongeluk op de Exploitatie-rekening binnenkomt:
 - Tegen het einde van het boekjaar vraagt **Theo van Doorn** (kerkelijk bureau) per mail om een bepaald bedrag over te schrijven naar PgH
 - Theo berekent het af te dragen bedrag
 
-## TODO's
+## Boekhouding
 
-- [ ] Welke bonnen zijn er? (kleuren, waarden)
-- [ ] Hoe worden collectebonnen geboekt? (code 170/171)
+- **Code 170**: Bestelling van collectebonnen (inkomsten op wijkkas)
+- **Code 171**: Afdracht naar PgH (einde boekjaar)

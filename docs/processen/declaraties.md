@@ -55,4 +55,10 @@ Declaraties en facturen worden opgeslagen in Google Drive `[jaar]/`:
 
 ## Declaratie als gift
 
-[TODO: Als iemand een declaratie instuurt die niet vergoed hoeft te worden maar als gift moet worden beschouwd - niets doen of boekhoudkundig verwerken?]
+Als iemand onkosten declareert en meldt "beschouw het maar als gift":
+
+1. **Giftverklaring sturen**: ondertekende PDF naar de declarant (te gebruiken voor belastingaangifte)
+2. **Dubbel boeken** in de boekhouding:
+   - Kosten boeken op de gebruikelijke kostencode (afhankelijk van soort onkosten)
+   - Gift boeken op code **210** (giften)
+   - Netto-effect is nul, maar maakt kosten én giften zichtbaar in het jaaroverzicht

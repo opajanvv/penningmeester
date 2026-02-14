@@ -17,6 +17,10 @@ Andere organisten en gastmusici krijgen een vrijwilligersvergoeding uit de wijkk
 - Annerose Korporaal
 - Jan van Veldhuizen
 
+**Tarief**: €40 per dienst + reiskosten (zie `declaraties.md` voor exacte tarieven per organist).
+
+**Frequentie**: Per kwartaal uitbetalen. Nakijken wie wanneer heeft gespeeld en dan vergoeding overmaken.
+
 Bij het uitnodigen van een gastmusicus: vraag wat de verwachte vergoeding is.
 
 ## Geen vergoeding
@@ -29,5 +33,4 @@ De relatief hoge kosten voor musici zijn een gevolg van de samenvoeging van BeMo
 
 ## TODO
 
-- [ ] Wat is het standaardbedrag voor vrijwilligersvergoeding?
-- [ ] Hoe wordt de vergoeding uitbetaald? (declaratie of overboeking?)
+- [ ] Sheet maken met overzicht orgelbeurten per organist en datum betaald

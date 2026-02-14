@@ -15,8 +15,8 @@ De boekhouding werkt volgens het **kasstelsel** (kasbasis):
 
 Dit is eenvoudiger dan een baten-lastenstelsel.
 
-## TODO's
+## Deadline en procedure
 
-- [ ] Wanneer moet de jaarrekening klaar zijn?
-- [ ] Naar wie gaat de jaarrekening? (kascommissie? kerkenraad?)
-- [ ] Is er een vast format of template?
+- **Deadline**: uiterlijk eind januari opsturen naar PgH (Theo van Doorn)
+- Daarna volgt eventueel commentaar vanuit PgH
+- Format: de Excel-boekhouding zelf (geen apart template)
