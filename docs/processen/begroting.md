@@ -4,12 +4,6 @@
 
 De penningmeester stelt de begroting zelf op.
 
-## Voorzetjes (eenmalig, 2026)
-
-Voor de eerste keer zijn er voorzetjes beschikbaar van:
-- Koos (zie `Cloud/penningmeester/2026/Begroting/Voorstellen Koos/`)
-- Jan Addink
-
 ## Deadline en goedkeuring
 
 **[URGENT - uitzoeken]** Het is februari en de begroting-deadline is nog onduidelijk:

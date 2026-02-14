@@ -25,8 +25,6 @@ Voor **al het overige gemeentewerk**:
 ## Toegang en beheer
 
 - **Bankieren via**: SKG Online (skggouda.nl)
-- **Penningmeester**: Jan (volledige toegang)
-- **Backup**: Harry Brons (toegang aangevraagd)
 
 ## Over SKG
 

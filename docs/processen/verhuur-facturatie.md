@@ -67,7 +67,7 @@ Op basis van het urenformulier in het postbakje: bedrag overmaken naar de hulpko
 
 ## Stap 7: Overnemen naar journaal
 
-[TODO: Jan documenteert dit in een volgende sessie. Bedragen uit Debiteuren sheet worden handmatig overgenomen naar het journaal in de Exploitatie sheet.]
+[TODO: Stap overnemen naar journaal nog documenteren. Bedragen uit Debiteuren sheet worden handmatig overgenomen naar het journaal in de Exploitatie sheet.]
 
 ## Controle
 
