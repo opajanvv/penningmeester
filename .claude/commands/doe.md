@@ -37,3 +37,4 @@ Taakcode: $ARGUMENTS
 ## Einde
 
 - Als de taak afgerond is, vraag of je de takenlijst moet updaten (status naar afgerond).
+- Controleer of de taak raakvlakken heeft met bestaande documentatie in `docs/` en stel voor om die bij te werken.
