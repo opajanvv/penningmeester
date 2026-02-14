@@ -35,7 +35,7 @@
 - [ ] **u16 - Spreadsheets koster/verhuurbeheerder combineren**: Onderzoeken of spreadsheets van koster en verhuurbeheerder gecombineerd kunnen worden met de hoofdsheets voor automatisering.
 - [✓] **u17 - Rekeningnummers toevoegen**: Rekeningnummers toevoegen aan `docs/referentie/rekeningen.md`.
 - [ ] **u18 - Toegang nieuwe gebruikers bankrekeningen**: Uitzoeken hoe het aanvragen van toegang voor nieuwe gebruikers werkt bij de bankrekeningen.
-- [ ] **u19 - Privacy/name masking documenteren**: Beschrijven hoe persoonsnamen worden gemaskeerd in het codeerproces (exportOngecodeerd/exportGecodeerd). Staat in de Apps Scripts maar nog niet in docs.
+- [✓] **u19 - Privacy/name masking documenteren**: Beschrijven hoe persoonsnamen worden gemaskeerd in het codeerproces (exportOngecodeerd/exportGecodeerd). Staat in de Apps Scripts maar nog niet in docs.
 - [ ] **u20 - Gemini non-profit credits onderzoeken**: De kerk heeft een non-profit Google Workspace. Uitzoeken of Gemini gratis beschikbaar is en of het Claude Code kan vervangen voor codeertaken.
 
 ### How-to's (h01-h06)
