@@ -18,18 +18,25 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 | 010 | Vaste activa | Geactiveerde investeringen, waarop wordt afgeschreven | Standaard |
 | 050 | Algemene wijkreserve | Staat ter vrije beschikking, max € 50.000 | Standaard |
 | 060 | Wijkfonds | Eigen vermogen boven € 50.000; beschikking na toestemming CVK | Standaard |
-| 070-079 | Bestemde wijkreserves | Bloemenfonds, activiteitenfonds e.d. | Standaard |
+| 070 | Wijkreserve Bestemd | Bloemenfonds, activiteitenfonds e.d. | Standaard |
+| 071 | Reservering Regenboogfonds | | Lichtbron |
+| 072 | Reservering Jongerenreis Bovenwijks | | Lichtbron |
 | 073 | Reservering Legaten | | Lichtbron |
 | 100-109 | Bankrekeningen | Betaalrekeningen en eventuele spaarrekeningen | Standaard |
+| 109 | Ouderensoos | | Lichtbron |
 | 110 | Spaargelden | Belegd bij centraal | Standaard |
 | 150-159 | Vorderingen | Uitsluitend per einde boekjaar | Standaard |
 | 160-169 | Schulden | Uitsluitend per einde boekjaar | Standaard |
 | 162 | Te betalen kosten Lichtjestocht | | Lichtbron |
+| 164 | Reservering LAK | | Lichtbron |
+| 165 | Reservering Lichtjestocht | | Lichtbron |
 | 170 | Inkomsten collectebonnen | Verkopen aan gemeenteleden | Standaard |
 | 171 | Afdracht collectebonnen | Afdrachten aan centraal | Standaard |
 | 196 | Verrekeningen | Saldo per ultimo jaar van resultaat wijkkas en exploitatie met centraal | Standaard |
+| 197 | Saldo vorig jaar | | Standaard |
 | 198 | Sluitrekening exploitatie | Saldo per ultimo jaar van de exploitatie kerkgebouw | Standaard |
 | 199 | Kruisposten | Overboekingen tussen liquide middelen en spaargelden | Standaard |
+| 200 | Vraagposten | | Standaard |
 
 ### Baten
 
@@ -80,6 +87,7 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | 313 | Koffie na de dienst | | Standaard |
 | 314 | Kerktelefoon/televisie | Kerkdienst Gemist | Standaard |
 | 315 | Exposities | | Standaard |
+| 316 | Doop, belijdenis, spec. dienst | | Lichtbron |
 | 319 | Overige kosten | | Standaard |
 
 ### Lasten - Gemeente-activiteiten (32x)
@@ -130,19 +138,17 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
 | 360 | Diverse kosten | Alle kosten die niet elders passen | Standaard |
+| 364 | Kopieermachine | | Lichtbron |
 | 365 | Kerktuin | Anneke Beemer, TOMA, tuincentrum, etc. | Lichtbron |
 | 370 | Paaskaars | BOCA Kaarsengroep, jubelkaars | Lichtbron |
 
-### Lasten - Tijdelijke codes (39x-40x)
+### Lasten - Overige codes (39x-40x)
 
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
-| 390 | Bijdrage cadeau ds. Hillegonda Ploeger | | Lichtbron |
 | 392 | Kerkbalans (naar PgH) | | Lichtbron |
-| 395 | Bijdrage cadeau Wilma van der Burg | | Lichtbron |
-| 400 | Bijdrage cadeau Heleen Weimar | | Lichtbron |
 | 402 | Wijkkas naar PgH | Kinderkoor | Lichtbron |
-| 405 | Bijdrage cadeau Oane Reitsma | | Lichtbron |
+| 407 | Kerststal | | Lichtbron |
 
 ---
 
@@ -155,14 +161,21 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | 080 | Reserve decentraal onderhoud | Saldo per ultimo van het jaar | Standaard |
 | 120-129 | Bankrekeningen | Betaal- en spaarrekeningen | Standaard |
 | 121 | Kas beheerder/koster | | Standaard |
+| 121a | Kas Morgenster | | Lichtbron |
+| 121b | Kas Regenboogkerk | | Lichtbron |
+| 122a | Bankrekening Morgenster | | Lichtbron |
+| 122b | Bankrekening Regenboogkerk | | Lichtbron |
 | 129 | Spaargeld Centraal | Afstorting saldo, interne overboeking | Lichtbron |
 | 130 | Buffetvoorraad | Uitsluitend per einde boekjaar | Standaard |
 | 140 | Debiteuren | Verhuur en buffet op rekening | Standaard |
+| 140a | Debiteuren Morgenster | | Lichtbron |
+| 140b | Debiteuren Regenboogkerk | | Lichtbron |
 | 150-159 | Vorderingen | Uitsluitend per einde boekjaar | Standaard |
 | 160-169 | Schulden | Uitsluitend per einde boekjaar | Standaard |
-| 197 | R.-c. decentraal onderhoud | Alle ontvangsten/betalingen lopen over exploitatierekeningen | Standaard |
+| 197 | Saldo vorig jaar | | Standaard |
 | 198 | Sluitrekening wijkkas | Saldo per ultimo dat als reserve in wijkkas wordt opgenomen | Standaard |
 | 199 | Kruisposten | Overboekingen tussen liquide middelen | Standaard |
+| 200 | Vraagposten | | Standaard |
 
 ### Baten - Verhuur (40x)
 
@@ -170,6 +183,7 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 |------|------|-------------|------|
 | 400 | Verhuur op rekening | | Standaard |
 | 401 | Verhuur contant | | Standaard |
+| 404 | Verhuur ruimte pedicure | | Lichtbron |
 
 ### Baten - Buffet (41x)
 
@@ -194,6 +208,7 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
 | 450 | Inkoop buffet | Sligro, catering, koffie | Standaard |
+| 455 | Afrekening personeelskosten koster | | Lichtbron |
 | 459 | Overige kosten buffet | | Standaard |
 
 ### Lasten - Schoonmaak (46x)
@@ -243,7 +258,7 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | Code | Naam | Toelichting | Bron |
 |------|------|-------------|------|
 | 560 | Schoonhouden | Schoonmaakartikelen | Standaard |
-| 561 | Benodigdheden en toiletpapier | Glasbewassing | Standaard |
+| 561 | Glasbewassing | | Standaard |
 | 562 | Vuilafvoer | Renewi | Standaard |
 | 563 | Planten | | Standaard |
 | 569 | Overige kosten | | Standaard |

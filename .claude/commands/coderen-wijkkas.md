@@ -66,7 +66,7 @@ Of zonder rijnummers voor losse invoer:
 | Code | Naam | Patroon |
 |------|------|---------|
 | 323 | Kosten lichtjestocht | lichtjestocht (kosten) |
-| 329 | Overige kosten gemeente activiteiten | ISERO (materiaal), kerststal, Beukers Bouwt |
+| 329 | Overige kosten gemeente activiteiten | ISERO (materiaal), Beukers Bouwt |
 | 332 | Maaltijden ouderen | driekoningenlunch, 3K lunch, senioren lunch, Cafetaria Jan Kruis, DaBa Hummen |
 | 333 | Attenties bij verjaardagen e.d. | bloemen sectie, Flyerzone, attenties sectiewerk |
 | 334 | Kerstattenties | kerst presentje, kerstviering senioren |
@@ -76,6 +76,7 @@ Of zonder rijnummers voor losse invoer:
 | Code | Naam | Patroon |
 |------|------|---------|
 | 360 | Overige diverse kosten | Piano Select, jeugdruimte, theelichtglazen, parkeervergunning, training, drumstel |
+| 364 | Kopieermachine | kopieermachine, printer, toner |
 | 365 | Kerktuin | kerktuin, Anneke Beemer, TOMA Bloemenservice, Puik tuincentrum, Smits tuinen, compost, gieters, regentonnen |
 | 370 | Paaskaars | paaskaars, BOCA Kaarsengroep, jubelkaars |
 
@@ -86,6 +87,7 @@ Of zonder rijnummers voor losse invoer:
 | 199 | Kruisposten | correctie, kruispost, foutief geboekt |
 | 392 | Kerkbalans (naar PGH) | kerkbalans, vrijwillige vaste bijdrage (naar PGH) |
 | 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
+| 407 | Kerststal | kerststal |
 
 ## Prioriteit matching
 
