@@ -16,17 +16,21 @@ Verzamel systematisch informatie over de administratie van De Lichtbron via een 
    - Anders: pak een nieuw onderwerp uit de lijst
    - Of: ontdek een ontbrekend onderwerp op basis van wat je al weet
 
-3. **Stel 1 vraag per keer**:
+3. **Controleer bestaande documentatie** voordat je een vraag stelt:
+   - Zoek met Grep in `docs/` of het onderwerp al (deels) gedocumenteerd is
+   - Stel alleen vragen over wat nog ontbreekt of onduidelijk is
+
+4. **Stel 1 vraag per keer**:
    - Houd vragen kort en concreet
    - Vraag door tot je genoeg hebt om de documentatie bij te werken
    - Het is OK om 3-5 vragen te stellen over hetzelfde onderwerp
 
-4. **Werk documentatie direct bij** zodra je genoeg informatie hebt:
+5. **Werk documentatie direct bij** zodra je genoeg informatie hebt:
    - Update bestaande bestanden in `docs/` of maak nieuwe aan
    - Houd het praktisch en concreet
    - Markeer onduidelijkheden met `[TODO: ...]`
 
-5. **Update de backlog** na elke wijziging:
+6. **Update de backlog** na elke wijziging:
    - Markeer onderwerp als behandeld of deels behandeld
    - Voeg nieuwe ontdekte onderwerpen toe
    - Noteer openstaande vragen

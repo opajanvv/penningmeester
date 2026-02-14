@@ -33,7 +33,7 @@ Dit project heeft 8 commands in `.claude/commands/`. Ze vallen in drie groepen:
 ### Documentatie bijwerken
 
 - `/inbox` — Verwerk ruwe notities uit `inbox/` naar `docs/`. Eenvoudige items direct, onduidelijke met vragen, complexe onderwerpen promoveren naar interview-backlog.
-- `/interview` — Verzamel kennis via een interviewproces. Stelt gerichte vragen, werkt docs bij, houdt een backlog bij in `docs/interview-backlog.md`.
+- `/interview` — Verzamel kennis via een interviewproces. Stelt gerichte vragen, werkt docs bij, houdt een backlog bij in `docs/interview-backlog.md`. Zoek altijd eerst in `docs/` of het onderwerp al (deels) gedocumenteerd is voordat je een vraag stelt.
 
 ### Takenbeheer
 
