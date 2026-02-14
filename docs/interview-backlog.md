@@ -14,11 +14,8 @@ Onderwerpen voor `/interview`. Aanpak: interview terwijl Jan de taak voor het ee
 
 Documenteren door te interviewen terwijl Jan deze taken voor het eerst doet.
 
-- **Facturering verhuur**: Hoe worden verhuurfacturen opgesteld en verstuurd? Welk format? Hoe worden tarieven bepaald?
-- **Aanmaningen**: Wanneer stuur je een aanmaning? Welke stappen?
-- **Debiteuren-sheet bijwerken**: Wekelijkse check betaalde facturen, markering bijwerken
-- **Koster-sheet en kas**: Maandafsluiting kas, bonnetjes, kopieren naar Drive
-- **Catering/buffet administratie**: Hoe werkt de afrekening van consumpties bij verhuur?
+- ~~**Verhuur-facturatieproces**~~: Gedocumenteerd in `docs/processen/verhuur-facturatie.md`. Open punt: overnemen naar journaal (Jan komt hierop terug).
+- **Aanmaningen**: Wanneer stuur je een aanmaning? Jortt heeft een dashboard hiervoor — hoe gebruik je dat?
 
 ## Nieuwe onderwerpen
 

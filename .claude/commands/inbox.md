@@ -25,8 +25,9 @@ Wanneer Jan `/inbox` gebruikt:
 1. **Kort overzicht** - Geef een beknopte lijst van wat er in `inbox/` staat (bestandsnaam + 1 regel omschrijving).
 2. **Item voor item verwerken** - Pak daarna elk item afzonderlijk op:
    - Lees het bestand
-   - Stel voor wat ermee moet gebeuren (verwerken naar docs, verplaatsen naar taken, samenvoegen, etc.)
-   - Of stel vragen als de betekenis/context onduidelijk is
+   - **Eenvoudig**: stel voor wat ermee moet gebeuren (verwerken naar docs, verplaatsen naar taken, samenvoegen, etc.)
+   - **Onduidelijk**: stel gerichte vragen, verwerk daarna
+   - **Complex**: als een onderwerp meer tijd vergt dan past in een inbox-sessie, bied aan om het te promoveren naar `docs/interview-backlog.md` als open onderwerp. Doe dit alleen op verzoek van Jan. Bij promoveren: verplaats het bronbestand naar `taken/bronnen/` en verwijs ernaar vanuit de backlog.
    - Wacht op bevestiging of antwoord van Jan
    - Voer de actie uit
    - Ga pas daarna door naar het volgende item

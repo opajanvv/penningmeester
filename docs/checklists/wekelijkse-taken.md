@@ -76,3 +76,4 @@ De sheets voor Wijkkas en Exploitatie hebben een Apps Script voor het inlezen va
 - [ ] How-to: Mailbox workflow (facturen, declaraties, archiveren)
 - [ ] How-to: Transacties controleren
 - [ ] How-to: Betalingen accorderen in SKG
+	
