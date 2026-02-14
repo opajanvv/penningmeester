@@ -2,7 +2,7 @@
 
 De Lichtbron heeft twee bankrekeningen, beide bij de Rabobank via SKG (Stichting Kerkelijk Geldbeheer Gouda).
 
-## Exploitatie-rekening
+## Exploitatie-rekening (NL64 RABO 0373 7225 40)
 
 Voor alles rondom de **verhuur van het kerkgebouw**:
 
@@ -10,7 +10,7 @@ Voor alles rondom de **verhuur van het kerkgebouw**:
 - Inkoop catering
 - Pin-inkomsten via Zettle
 
-## Wijkkas-rekening
+## Wijkkas-rekening (NL45 RABO 0373 7224 94)
 
 Voor **al het overige gemeentewerk**:
 
@@ -30,5 +30,4 @@ Voor **al het overige gemeentewerk**:
 
 SKG is een financiële dienstverlener specifiek voor kerken. Zij bieden betaal-, spaar- en financieringsdiensten. De rekeningen lopen technisch via SKG, die op hun beurt bij de Rabobank bankiert.
 
-[TODO: Rekeningnummers toevoegen?]
 [TODO: Hoe werkt het aanvragen van toegang voor nieuwe gebruikers?]
