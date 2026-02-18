@@ -33,6 +33,12 @@ Stappenplan om nieuwe bankafschriften te coderen met Claude. Er zijn twee Apps S
 2. Lees de opmerking in kolom M en kies de juiste code.
 3. Controleer ook de overige codes steekproefsgewijs.
 
+## 5. Coderingspatronen verbeteren
+
+1. Draai het script **exportGecodeerd** in de Google Sheet.
+2. Kopieer de output en plak in Claude met `/leer-codering wijkkas` (of `exploitatie`).
+3. Claude vergelijkt de definitieve codes met eerdere voorstellen en werkt de patronen bij.
+
 ## Gevoelige data
 
 Het Journaal bevat geen IBAN's of adressen -- alleen namen, omschrijvingen en bedragen. Namen van tegenpartijen worden meegestuurd naar Claude omdat ze nodig zijn voor de codering (bijv. "Sligro" -> inkoop buffet, "Care" -> schoonmaak).

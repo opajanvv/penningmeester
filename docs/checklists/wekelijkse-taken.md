@@ -10,6 +10,7 @@ De penningmeester werkt 1 dag per week. Dit zijn de vaste taken:
 4. **Transacties wijkkas controleren** - alles correct? Niets op verkeerde rekening binnengekomen?
 5. **Transacties exploitatie verwerken** - betaalde verhuurfacturen verwerken in debiteurenlijst
 6. **Betalingen accorderen** - alle ingevoerde betalingen in SKG accorderen (anders gaan ze niet weg)
+7. **Coderen** - grootboekcodes toewijzen aan nieuwe boekingen (wijkkas en exploitatie). Mag een week worden overgeslagen.
 
 ---
 
@@ -139,6 +140,12 @@ Zie voor details: `../processen/betalen-facturen.md` en `../processen/declaratie
 3. Klik het **bovenste checkboxje** aan om alle regels te selecteren (beide rekeningen in één keer)
 4. Klik op **"Verzenden"**
 5. Accordeer met de **digipass** (fysiek apparaat met kleurenraster, vergelijkbaar met Rabo Reader)
+
+---
+
+## How-to: Coderen
+
+Zie `../../processen/bankafschriften-coderen.md` voor het volledige stappenplan.
 
 ---
 

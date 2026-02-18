@@ -42,4 +42,7 @@
 ### How-to's (h01-h06)
 - [ ] **h01-h06 - How-to's uitwerken**: 6 how-to's identificeren en uitwerken (zie `docs/drafts/wekelijkse-taken.md`).
 
+### Documentatie afwerking (d01)
+- [ ] **d01 - Crosslinks toevoegen**: Alle docs-pagina's doorlopen en relevante verwijzingen naar andere pagina's toevoegen. Uitvoeren als alle andere documentatietaken klaar zijn.
+
 ---
