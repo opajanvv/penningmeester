@@ -12,16 +12,17 @@
 
 ## Wekelijkse check
 
-1. Check de mutaties op de wijkkas-rekening
+1. Open de sheet **'Bestelling Collectebonnen'** (privé account) — daar staan de laatst doorgegeven bestellingen
+   - ![Sheet Bestelling Collectebonnen](../assets/screenshot-2026-02-18_10-52-21.png)
+2. Zoek de laatste bestelling op in de wijkkas-mutaties (Sheet of SKG)
    - Zoek naar bestellingen in de omschrijvingen (zie voorbeeld hieronder)
    - ![Voorbeeld mutatie](../assets/screenshot-2026-02-04_10-54-03.png)
-2. In de omschrijving staat welke bonnen besteld zijn (oranje, wit)
+3. In de omschrijving staat welke bonnen besteld zijn (oranje, wit)
    - ![Voorbeeld bestelling in omschrijving](../assets/screenshot-2026-02-04_10-49-01.png)
-3. Verzamel bestellingen van nieuw naar oud totdat je bij een al doorgegeven bestelling komt
-4. Geef naam, bestelling en bedrag door aan Ewout Limburg
-5. Gebruik Sheet 'Collectebonnen' (in privé account) voor copy-paste in de mail
-   - In deze sheet kun je zien welke de laatste was
-6. Als er geen nieuwe bestellingen zijn: dit ook doorgeven aan Ewout
+4. Kijk of er na die laatste bestelling nog nieuwe zijn binnengekomen
+5. Nieuwe bestellingen overnemen in de sheet 'Bestelling Collectebonnen'
+6. Copy/paste de nieuwe bestellingen in een mailtje voor Ewout (naam, bestelling, bedrag)
+7. Als er geen nieuwe bestellingen zijn: dit ook doorgeven aan Ewout
 
 ## Bestelling op verkeerde rekening
 

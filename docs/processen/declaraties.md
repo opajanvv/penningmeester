@@ -17,8 +17,10 @@ Declaraties komen binnen via:
 ## Verwerken
 
 1. **Betaalopdracht invoeren** in SKG (rekening: wijkkas)
-2. **Betaalopdracht verzenden** (anders blijft deze staan)
-3. **Mail archiveren**: van Inbox naar label `_Betaald [jaar]`
+2. **Betaalopdracht accorderen** — dit gebeurt apart, bij stap "Betalingen accorderen" in de wekelijkse taken
+3. **Mail archiveren**: van Inbox naar label `Betaalde declaraties`
+
+Bonnetjes hoeven niet apart opgeslagen te worden in Drive. Ze blijven als bijlage bij de mail.
 
 ## Uitzonderingen
 
@@ -43,15 +45,15 @@ Bonnetjes die fysiek binnenkomen, scant de penningmeester zelf in.
 
 ## Mappenstructuur
 
-Declaraties en facturen worden opgeslagen in Google Drive `[jaar]/`:
+Facturen worden opgeslagen in Google Drive `[jaar]/`:
 
 **Exploitatie**:
-- `Exploitatie/Declaraties/`
 - `Exploitatie/Ontvangen facturen/`
 
 **Wijkkas**:
-- `Wijkkas/Ontvangen declaraties/`
 - `Wijkkas/Ontvangen facturen/`
+
+Declaraties worden niet apart opgeslagen in Drive. De bonnetjes blijven als bijlage bij de gearchiveerde mail (label `Betaalde declaraties`).
 
 ## Declaratie als gift
 
