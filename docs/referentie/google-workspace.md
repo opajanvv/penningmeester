@@ -56,8 +56,8 @@ De administratie draait in twee Google Sheets per boekjaar:
 
 1. **Bankmutaties** (Wijkkas): download van SKG Online → plakken in SKG-tabblad → journaalregels genereren → grootboekcode toekennen
 2. **Kas/Zettle** (Exploitatie): koster houdt dit bij in aparte spreadsheet → copy-paste naar Kas-tabblad → journaalregels
-3. **Verhuur** (Exploitatie): beheerder verstuurt facturen en houdt spreadsheet bij → copy-paste naar Verhuur&Buffet
+3. **Verhuur** (Exploitatie): koster houdt spreadsheet bij → penningmeester factureert via Jortt → copy-paste naar Verhuur&Buffet
 
 ## Verbeterkansen
 
-[TODO: Later onderzoeken: spreadsheets van koster en verhuurbeheerder combineren met de hoofdsheets voor automatisering]
+[TODO: Later onderzoeken: koster-spreadsheet combineren met de hoofdsheets voor automatisering]
