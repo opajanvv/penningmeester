@@ -45,7 +45,7 @@ Jortt geeft factuurnummers het formaat `JJJJMM-XXXX` op basis van de huidige maa
 
 ### Automatisch archiveren
 
-Jortt stuurt een kopiefactuur naar penningmeester@delichtbron.nl. Het AppScript `verwerkFactuurMails()` archiveert de bijlage automatisch naar `2026/Exploitatie/Facturen/` op Google Drive en verwijdert de mail. Dit script handmatig uitvoeren als de facturering klaar is.
+Jortt stuurt een kopiefactuur naar penningmeester@delichtbron.nl. Het AppScript `verwerkFactuurMails()` archiveert de bijlage automatisch naar `2026/Exploitatie/Facturen/` op Google Drive en verwijdert de mail. Dit script handmatig uitvoeren als de facturering klaar is. Het script is te vinden via [scripts.google.com/home](https://scripts.google.com/home).
 
 ## Stap 5: Debiteuren Exploitatie sheet bijwerken
 
@@ -54,18 +54,46 @@ Voeg per factuur een regel toe in de sectie van de juiste maand in tabblad BK202
 - Huurder
 - Bedrag huur
 - Bedrag rest (consumpties etc.)
-- Kolom betaaldatum: wordt later ingevuld bij de wekelijkse controle
+- Kolom betaaldatum: wordt later ingevuld bij de wekelijkse controle (zie hieronder)
+
+### Wekelijkse controle: betalingen verhuurfacturen
+
+Wekelijks controleren of betaalde verhuurfacturen correct verwerkt zijn:
+
+1. Open de Google Sheet **Debiteuren** en ga naar het tabblad van het huidige jaar
+2. Open daarnaast de **exploitatie-sheet** en bekijk de nieuwe mutaties (van nieuw naar oud)
+3. Bij een betaling met een factuurnummer in de omschrijving (bijv. `202512-270`):
+   - Zoek het factuurnummer op in de Debiteuren sheet
+   - Controleer of het bedrag klopt
+   - Vul de betaaldatum in
+   - Markeer de factuur ook als betaald in Jortt (de betaaldatum in Jortt wordt de dag van het vinkje, niet de werkelijke betaaldatum — dat is niet erg)
+   - Bij afwijkend bedrag: plaats een notitie in de Debiteuren sheet en onderneem zo nodig actie
+4. Stop zodra je een betaling tegenkomt die al als betaald gemarkeerd is
+
+**Waarom ook in Jortt markeren?** Zo zijn openstaande facturen en aanmaningen makkelijker te selecteren in Jortt.
+
+**Verdwaalde collectebonbestellingen:** soms komt een collectebonbestelling binnen op de exploitatierekening in plaats van de wijkkas. Afhandeling:
+
+1. Maak een betaalopdracht in SKG van exploitatie naar wijkkas (kruispost)
+2. Codeer de ontvangst en overboeking op de exploitatierekening als kruispost
+3. Codeer de ontvangst op de wijkkas als code 170 (collectebonnen bestelling)
 
 ### Contant en pin
 
 - **Contant**: overnemen uit de tab Kasafdracht in de koster-sheet (bedrag "Ontvangsten") — zie ![kasafdracht](../assets/screenshot-2026-02-12_18-47-34-kasafdracht.png)
-- **Pin**: maandtotaal opzoeken in de Zettle website
+- **Pin**: maandtotaal opzoeken in de Zettle website:
+  1. Ga naar `https://my.zettle.com/reports/v2?fromDate=JJJJ-MM-01&toDate=JJJJ-MM-31` (pas de datum aan naar de juiste maand)
+  2. Het totaalbedrag staat linksboven onder "Verkooptrends" — zie ![zettle rapport](../assets/screenshot-2026-03-05_10-27-31-zettle-rapport.png)
 
-## Stap 6: Vrijwilligersvergoeding
+## Stap 6: Declaratie koster
+
+Als er een declaratieformulier van de koster bij de papieren zit: de gedeclareerde kosten overmaken.
+
+## Stap 7: Vrijwilligersvergoeding
 
 Op basis van het urenformulier in het postbakje: bedrag overmaken naar de hulpkoster(s).
 
-## Stap 7: Overnemen naar journaal
+## Stap 8: Overnemen naar journaal
 
 [TODO: Stap overnemen naar journaal nog documenteren. Bedragen uit Debiteuren sheet worden handmatig overgenomen naar het journaal in de Exploitatie sheet.]
 
@@ -76,6 +104,7 @@ Onderaan de koster-sheet staan controletotalen. Deze moeten overeenkomen met de 
 ## Bekende problemen
 
 - Soms verschijnt er een popup in Jortt (zie ![jortt popup](../assets/screenshot-2026-02-12_16-05-43-jortt-popup.png)). De inhoud wordt bewaard, gewoon de pagina refreshen.
+- Met het Jortt Starter abonnement kunnen maximaal 10 facturen per uur verstuurd worden (zie ![jortt limiet](../assets/screenshot-2026-03-04_21-35-50-jortt-limiet.png)). Bij meer dan 10 huurders even wachten voor de volgende batch.
 
 ## Verbeterpunten
 

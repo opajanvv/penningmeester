@@ -14,8 +14,9 @@
 ### Sheets (s01)
 - [✓] **s01 - Coderingssheet maken voor VLOOKUP**: CSV's gegenereerd in `taken/bronnen/codering-wijkkas.csv` en `taken/bronnen/codering-exploitatie.csv`. Importeren als tabblad in Google Sheets.
 
-### Sheets (s02)
+### Sheets (s02-s03)
 - [⚠] **s02 - Onderste rijen Journaal naar boven**: Uitzoeken of de onderste rijen in de tabbladen 'Journaal' van de sheets voor Wijkkas en Exploitatie naar boven gehaald kunnen worden.
+- [ ] **s03 - Totaalkolom factuurprijs in koster-sheet**: In de Excel-sheet van de koster een totaalkolom toevoegen voor de factuurprijs.
 
 ### Uitzoeken (u01-u16)
 - [✓] **u01 - Collecte afstorten uitzoeken**: Collectegeld gaat rechtstreeks naar PgH-rekening. Geen rol penningmeester. Zie `docs/interview-backlog.md`.

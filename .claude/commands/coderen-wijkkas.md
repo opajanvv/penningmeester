@@ -31,7 +31,7 @@ Of zonder rijnummers voor losse invoer:
 |------|------|---------|
 | 73 | Reservering Legaten | legaat, nalatenschap (let op: "Erven" in naam betekent niet automatisch legaat) |
 | 162 | Te betalen kosten Lichtjestocht | Lichtjestocht (kosten/bijdrage) |
-| 170 | Verkoop collectebonnen | collectebonnen (verkoop), bonnen bestelling |
+| 170 | Verkoop collectebonnen | collectebonnen (verkoop), bonnen bestelling, kaarten (= collectebonnen) |
 | 171 | Afdracht collectebonnen | doorzendcollecte (van exploitatie), opbrengst collectebonnen (van PGH) |
 | 210 | Giften wijkkas | gift, bijdrage wijkkas, PWG De Lichtbron, maandelijkse gift |
 | 215 | Doorzendgiften | koffiepotje (opbrengst), Nepal (gift van persoon) |
@@ -56,7 +56,7 @@ Of zonder rijnummers voor losse invoer:
 
 | Code | Naam | Patroon |
 |------|------|---------|
-| 311 | Kosten eredienst | bloemen (declaratie), avondmaalwijn, Fa. W. van Oosterom, kaarsen eredienst |
+| 311 | Kosten eredienst | bloemen (declaratie), avondmaalwijn, Fa. W. van Oosterom, kaarsen eredienst, orgel (materiaal/scherm) |
 | 312 | Cantorij en koren | cantorij, koor |
 | 314 | Kosten kerktelefoon/televisie | Kerkdienst Gemist |
 | 319 | Overige kosten eredienst | avondmaalbekertjes, avondmaalvuller |
@@ -85,16 +85,17 @@ Of zonder rijnummers voor losse invoer:
 | Code | Naam | Patroon |
 |------|------|---------|
 | 199 | Kruisposten | correctie, kruispost, foutief geboekt |
-| 392 | Kerkbalans (naar PGH) | kerkbalans, vrijwillige vaste bijdrage (naar PGH) |
+| 392 | Kerkbalans (naar PGH) | kerkbalans, kerkelijke bijdrage, vrijwillige vaste bijdrage (naar PGH) |
 | 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
 | 407 | Kerststal | kerststal |
 
 ## Prioriteit matching
 
-1. **Specifieke namen eerst** - SKG Collect, Kerkdienst Gemist, specifieke leveranciers
-2. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
-3. **Geen of vage omschrijving** - Als er geen duidelijke omschrijving is, default naar gift (210)
-4. **Bij twijfel** - Geef code 200 (Vraagposten) met opties
+1. **Omschrijving boven leverancier** - Als de omschrijving een duidelijk patroon bevat, gebruik dat (bijv. Micro-Projects + "orgel" = 311, niet 307)
+2. **Specifieke namen** - SKG Collect, Kerkdienst Gemist, specifieke leveranciers (alleen als omschrijving geen ander patroon geeft)
+3. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
+4. **Geen of vage omschrijving** - Als er geen duidelijke omschrijving is, default naar gift (210)
+5. **Bij twijfel** - Geef code 200 (Vraagposten) met opties
 
 ## Output formaat
 
