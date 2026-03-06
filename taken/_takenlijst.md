@@ -15,7 +15,11 @@
 - [✓] **s01 - Coderingssheet maken voor VLOOKUP**: CSV's gegenereerd in `taken/bronnen/codering-wijkkas.csv` en `taken/bronnen/codering-exploitatie.csv`. Importeren als tabblad in Google Sheets.
 
 ### Sheets (s02-s03)
-- [⚠] **s02 - Onderste rijen Journaal naar boven**: Uitzoeken of de onderste rijen in de tabbladen 'Journaal' van de sheets voor Wijkkas en Exploitatie naar boven gehaald kunnen worden.
+- [ ] **s02 - Totaalrijen Journaal dichter bij data**: In de Journaal-tabbladen van zowel Wijkkas als Exploitatie zijn ~1900 rijen gereserveerd (3-1922), maar er komen max ~1500. De totaalrijen staan op rij 1923/1925, ver voorbij de data. Aanpak:
+  - Lege rijen tussen laatste data-rij en rij 1922 verwijderen (of verkleinen naar een kleinere marge, bijv. 50 lege rijen)
+  - Totaalrijen (1923/1925) direct na de marge plaatsen
+  - Formules aanpassen: huidige vaste bereiken (`SOM(E4:E1923)`, `SOM(F4:F1923)`, en de ALS-formule op rij 1923) verkleinen naar het nieuwe bereik
+  - Eventueel: dynamische bereiken gebruiken zodat dit probleem zich niet herhaalt
 - [ ] **s03 - Totaalkolom factuurprijs in koster-sheet**: In de Excel-sheet van de koster een totaalkolom toevoegen voor de factuurprijs.
 
 ### Uitzoeken (u01-u16)
@@ -41,7 +45,7 @@
 - [ ] **u21 - CSV-download workflow verbeteren**: CSV-export vanuit SKG belandt in Downloads en moet handmatig verplaatst + hernoemd worden. Uitzoeken of dit handiger kan (browser-instelling, script, of andere aanpak).
 
 ### How-to's (h01-h06)
-- [ ] **h01-h06 - How-to's uitwerken**: 6 how-to's identificeren en uitwerken (zie `docs/drafts/wekelijkse-taken.md`).
+- [x] **h01-h06 - How-to's uitwerken**: ~~Afgerond~~ — how-to's staan in `docs/processen/` en `docs/checklists/wekelijkse-taken.md`.
 
 ### Documentatie afwerking (d01)
 - [ ] **d01 - Crosslinks toevoegen**: Alle docs-pagina's doorlopen en relevante verwijzingen naar andere pagina's toevoegen. Uitvoeren als alle andere documentatietaken klaar zijn.

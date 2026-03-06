@@ -57,6 +57,13 @@ Dit project heeft 8 commands in `.claude/commands/`. Ze vallen in drie groepen:
 6. `/leer-codering` — Verbeter patronen na correcties
 7. `/interview` — Vul ontbrekende kennis aan
 
+## Sheet-referenties
+
+- **Locatie**: `taken/bronnen/`
+- **Bestanden**: `wijkkas.ods`, `exploitatie.ods`, `debiteuren.ods`, `koster-JJJJ-MM.ods` (per maand)
+- **Inhoud**: complete export (alle tabbladen), focus op structuur en formules, data hoeft niet actueel
+- **Wanneer**: Jan exporteert deze als er een taak is die inzicht in de sheet vereist
+
 ## Scripts
 
 - Bij nieuwe scripts: gebruik configuratie (Script Properties, env vars) voor IDs en paden vanaf het begin, niet hardcoded waarden.

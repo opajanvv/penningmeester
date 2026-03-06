@@ -68,8 +68,3 @@ Zie [`../processen/betalingen-accorderen.md`](../processen/betalingen-accorderen
 Zie [`../processen/bankafschriften-coderen.md`](../processen/bankafschriften-coderen.md) voor het volledige stappenplan.
 
 ---
-
-## How-to's (nog uit te werken)
-
-- [ ] How-to: Collectebonnen bestellingen verwerken
-	
