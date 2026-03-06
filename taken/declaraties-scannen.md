@@ -1,7 +1,3 @@
 # Declaraties scannen
 
-Declaraties scannen en verwerken.
-
-## Deadline
-
-2026-02-25 (morgen)
+Declaratiebonnetjes worden nu per maand bewaard. Optioneel: scannen voor digitaal archief. Niet urgent.

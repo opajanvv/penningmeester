@@ -2,52 +2,25 @@
 
 ## Openstaande taken
 
-### Begroting (b01)
-- [✓] **b01 - Begroting voor Wijkkas maken**: Maak een eigen begroting voor de Wijkkas administratie aan de hand van twee bestaande voorstellen:
-  - `Begroting 2026 invulsheet begroting voor De Lichtbron deze is gemaakt door Koos.xlsx`
-  - `Begroting 2026 wijkkas.xlsx`
-  - Beide bestanden staan in `docs/begroting/`
-
-### Excel/Sheets formules (f01)
-- [ ] **f01 - Jaarcijfers formules verbeteren**: In de jaarcijfers sheet kunnen de formules voor de codes beter worden gemaakt
-
-### Sheets (s01)
-- [✓] **s01 - Coderingssheet maken voor VLOOKUP**: CSV's gegenereerd in `taken/bronnen/codering-wijkkas.csv` en `taken/bronnen/codering-exploitatie.csv`. Importeren als tabblad in Google Sheets.
-
-### Sheets (s02-s03)
-- [ ] **s02 - Totaalrijen Journaal dichter bij data**: In de Journaal-tabbladen van zowel Wijkkas als Exploitatie zijn ~1900 rijen gereserveerd (3-1922), maar er komen max ~1500. De totaalrijen staan op rij 1923/1925, ver voorbij de data. Aanpak:
-  - Lege rijen tussen laatste data-rij en rij 1922 verwijderen (of verkleinen naar een kleinere marge, bijv. 50 lege rijen)
-  - Totaalrijen (1923/1925) direct na de marge plaatsen
-  - Formules aanpassen: huidige vaste bereiken (`SOM(E4:E1923)`, `SOM(F4:F1923)`, en de ALS-formule op rij 1923) verkleinen naar het nieuwe bereik
-  - Eventueel: dynamische bereiken gebruiken zodat dit probleem zich niet herhaalt
+### Sheets (s03)
 - [ ] **s03 - Totaalkolom factuurprijs in koster-sheet**: In de Excel-sheet van de koster een totaalkolom toevoegen voor de factuurprijs.
 
-### Uitzoeken (u01-u16)
-- [✓] **u01 - Collecte afstorten uitzoeken**: Collectegeld gaat rechtstreeks naar PgH-rekening. Geen rol penningmeester. Zie `docs/interview-backlog.md`.
-- [x] **u02 - Parkeervergunning uitzoeken**: ~~Vervallen~~ — rekening komt via de koster.
-- [ ] **u03 - Brief activiteitenfonds opzoeken**: Lopende zaak uit overdracht Koos. Moet nog opgezocht worden.
-- [ ] **u04 - ODIDO abonnement uitzoeken**: Kostertelefoon (0638824616) abonnement staat op naam Koos (€17,67/maand). 1x per jaar wordt dit overgemaakt vanuit exploitatierekening. Uitzoeken: overzetten of zo laten?
-- [ ] **u05 - Coderen automatiseren**: Onderzoeken of codering (deels) geautomatiseerd kan worden. Ideeën: coderingsschema als tabblad in sheets, administratie 2025 als trainingsdata.
-- [ ] **u06 - Collectebonnen herkennen automatiseren**: LLM gebruiken voor fuzzy matching van collectebonbestellingen in mutatie-omschrijvingen. Idee: bestellingen van vorig jaar als voorbeelden in een skill. Alternatief: code 170 uit het coderingsproces gebruiken als input voor de collectebonnen-check (zodat je niet handmatig hoeft te zoeken).
-- [ ] **u07 - Google Sheets koppelen met IMPORTRANGE**: Uitzoeken hoe je sheets aan elkaar koppelt met IMPORTRANGE.
-- [✓] **u08 - Gift via declaratie boeken**: Dubbel boeken: kosten op gebruikelijke code + gift op 210. Giftverklaring-PDF sturen. Zie `docs/processen/declaraties.md`.
+### Uitzoeken
+- [ ] **u03 - Brief activiteitenfonds opzoeken**: Lopende zaak uit overdracht Koos. Navragen bij Koos.
+- [ ] **u04 - ODIDO abonnement uitzoeken**: Kostertelefoon (0638824616) abonnement staat op naam Koos (17,67/maand). 1x per jaar overgemaakt vanuit exploitatierekening. Uitzoeken: overzetten of zo laten?
 - [ ] **u09 - Openstaande verhuurfacturen per jaareinde**: Moeten openstaande verhuurfacturen per jaareinde als vordering geboekt worden? (code 140 Debiteuren verhuur)
-- [ ] **u10 - Saldocontrole in sheets**: Controle inbouwen van begin- en eindsaldo van de bankafschriften in de sheets.
-- [ ] **u12 - Coderingsschema scannen**: Scan maken van het coderingsschema (5 A4's) en in inbox/ zetten.
-- [✓] **u13 - Collectebonnen bonsoorten en boeking**: Code 170 = bestelling, code 171 = afdracht naar PgH. Bonsoorten niet relevant voor penningmeester. Zie `docs/processen/collectebonnen.md`.
-- [ ] **u14 - Kascommissie**: Uitzoeken hoe de kascommissie-controle werkt. (Jan heeft dit nog niet meegemaakt)
-- [ ] **u15 - Overdracht Tjerk**
-- [ ] **u16 - Spreadsheets koster/verhuurbeheerder combineren**: Onderzoeken of spreadsheets van koster en verhuurbeheerder gecombineerd kunnen worden met de hoofdsheets voor automatisering.
-- [✓] **u17 - Rekeningnummers toevoegen**: Rekeningnummers toevoegen aan `docs/referentie/rekeningen.md`.
-- [ ] **u18 - Toegang nieuwe gebruikers bankrekeningen**: Uitzoeken hoe het aanvragen van toegang voor nieuwe gebruikers werkt bij de bankrekeningen.
-- [✓] **u19 - Privacy/name masking documenteren**: Beschrijven hoe persoonsnamen worden gemaskeerd in het codeerproces (exportOngecodeerd/exportGecodeerd). Staat in de Apps Scripts maar nog niet in docs.
+- [ ] **u14 - Kascommissie**: Uitzoeken hoe de kascommissie-controle werkt.
 - [ ] **u20 - Gemini non-profit credits onderzoeken**: De kerk heeft een non-profit Google Workspace. Uitzoeken of Gemini gratis beschikbaar is en of het Claude Code kan vervangen voor codeertaken.
-- [ ] **u21 - CSV-download workflow verbeteren**: CSV-export vanuit SKG belandt in Downloads en moet handmatig verplaatst + hernoemd worden. Uitzoeken of dit handiger kan (browser-instelling, script, of andere aanpak).
 
-### How-to's (h01-h06)
-- [x] **h01-h06 - How-to's uitwerken**: ~~Afgerond~~ — how-to's staan in `docs/processen/` en `docs/checklists/wekelijkse-taken.md`.
+### Geparkeerd (na samenvoegen)
+- [ ] **u05 - Coderen automatiseren**: Onderzoeken of codering (deels) geautomatiseerd kan worden, bijv. via Gemini (zie u20).
+- [ ] **u06 - Collectebonnen herkennen automatiseren**: LLM gebruiken voor fuzzy matching van collectebonbestellingen in mutatie-omschrijvingen.
+- [ ] **u10 - Saldocontrole in sheets**: Controle inbouwen van begin- en eindsaldo van de bankafschriften in de sheets.
+- [ ] **u16 - Spreadsheets koster/verhuurbeheerder combineren**: Koster- en debiteurensheet integreren in de hoofdsheet.
+- [ ] **u21 - CSV-download workflow verbeteren**: CSV-export vanuit SKG belandt in Downloads en moet handmatig verplaatst + hernoemd worden.
+- [ ] **d01 - Crosslinks toevoegen**: Alle docs-pagina's doorlopen en relevante verwijzingen naar andere pagina's toevoegen.
 
-### Documentatie afwerking (d01)
-- [ ] **d01 - Crosslinks toevoegen**: Alle docs-pagina's doorlopen en relevante verwijzingen naar andere pagina's toevoegen. Uitvoeren als alle andere documentatietaken klaar zijn.
+### Overig
+- [ ] **Declaraties scannen**: Declaratiebonnetjes worden per maand bewaard. Optioneel: scannen voor digitaal archief. Niet urgent.
 
 ---
