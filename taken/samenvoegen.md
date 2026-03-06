@@ -1,134 +1,106 @@
 # Plan: samenvoegen wijkkas en exploitatie in een sheet
 
-**Status**: fase 3 en 4 uitgevoerd, fase 1 en 2 wachten op Jan
+**Status**: scripts klaar, Jan bouwt de Google Sheet
 
-## Huidige situatie
+**Branch**: `samenvoegen` (main is ongewijzigd, oude workflow werkt daar nog)
 
-Twee aparte Google Sheets met identieke structuur:
-- **Wijkkas 2026**: Jaarcijfers, Kolommenbalans, Journaal, SKG
-- **Exploitatie 2026**: Jaarcijfers, Kolommenbalans, Journaal, Kas, Verhuur&Buffet
+## Beslissingen genomen
 
-Elke sheet heeft eigen grootboekcodes die **niet overlappen**:
-- Wijkkas: 199, 210-407 (giften, collectes, gemeentewerk)
-- Exploitatie: 140-600 (verhuur, buffet, onderhoud)
+### Sheet-structuur (herzien)
 
-Ze zijn al verbonden via code 198 (sluitrekening) voor de gecombineerde jaarrekening.
+Het oorspronkelijke plan had SKG-tabbladen die via celverwijzingen naar een Journaal spiegelden. Dat werkt niet met twee SKG-tabbladen naar een enkel Journaal. Na bespreking is gekozen voor een andere aanpak:
 
-## Boekhoudkundig oordeel
+**SKG-tabbladen vervallen.** De CSV-import schrijft direct naar de Journaal-tabbladen. De ruwe CSV-data wordt bewaard in Google Drive (het import-script verplaatst verwerkte CSV's naar "Ingelezen CSV's"). Volledige afschriften staan als PDF in Drive en zijn na te kijken in SKG Online.
 
-**Dit is een goed idee.** Het is boekhoudkundig zelfs de meer gangbare aanpak. De Lichtbron is een entiteit met twee bankrekeningen — in de boekhouding is het normaal om meerdere bankrekeningen in een administratie te voeren, elk als eigen grootboekrekening.
+**Twee journaaltabbladen** (geen een). Redenen:
+- Rijnummers blijven stabiel per rekening (belangrijk voor het coderingsproces)
+- Deduplicatie bij CSV-import werkt per tabblad, geen conflicten
+- Bij het opheffen van een rekening is het simpelweg een tabblad weghalen
+- De Kolommenbalans somt over beide journalen + memoriaal
 
-De huidige scheiding in twee sheets is een technische keuze, geen boekhoudkundige noodzaak. De sluitrekening 198 is eigenlijk een workaround om twee losse administraties achteraf te combineren.
+### Tabbladen in de nieuwe sheet
 
-### Voordelen
+| Tabblad | Inhoud |
+|---------|--------|
+| Journaal Wijkkas | CSV-import + codering (was: SKG + Journaal) |
+| Journaal Exploitatie | CSV-import + codering |
+| Memoriaal | Beginbalansen, correcties, handmatige boekingen |
+| Kolommenbalans | SUMIF over alle drie bovenstaande tabbladen |
+| Jaarcijfers | Rapportage |
+| Kas | Contant/Zettle kasboek |
+| Verhuur en Buffet | Factuuroverzicht |
+| Grootboekschema | Gecombineerde codelijst (129 codes, 198 verwijderd) |
 
-1. **Een bron van waarheid** — geen dubbele sluitrekeningen, geen synchronisatieproblemen
-2. **Kolommenbalans en jaarrekening automatisch over het geheel** — geen handmatige consolidatie
-3. **Minder onderhoud** — formules, structuur en tabbladen maar 1x beheren
-4. **Kruisposten direct zichtbaar** — overboekingen tussen rekeningen zijn gewoon journaalposten
-5. **Rapportage per deelgebied blijft werken** — grootboekcodes overlappen niet, dus filteren op code-range geeft dezelfde inzichten als nu
+### Journaal-kolomindeling
 
-### Aandachtspunten
+| Kolom | Inhoud | Bron |
+|-------|--------|------|
+| A | Grootboekcode | Leeg bij import, gevuld door codering |
+| B | Naam rekening | VLOOKUP naar Grootboekschema |
+| C | Datum | CSV kolom 3 |
+| D | Bron | "SKG" (automatisch bij import) |
+| E | Debet | CSV bedrag als negatief |
+| F | Credit | CSV bedrag als positief |
+| G | Omschrijving | CSV kolom 10 |
+| H | Afschriftnummer | CSV kolom 1 |
+| I | Naam begunstigde | CSV kolom 7 |
+| M | Toelichting | Voor correcties/vraagposten |
 
-1. **Journaal wordt groter** — meer regels, maar functioneel geen probleem in Google Sheets
-2. **Twee SKG-tabbladen** — import per bankrekening, maar beide voeden hetzelfde journaal
-3. **Extra tabbladen exploitatie** — Kas en Verhuur&Buffet moeten mee, ze hebben geen equivalent in wijkkas
-4. **Name-masking verschilt** — wijkkas maskeert persoonsnamen voor Claude, exploitatie niet. In een journaal moet Claude alle namen zien of alle namen gemaskeerd krijgen. Oplossing: maskeren bij export naar Claude (zoals nu), niet in de sheet zelf.
-5. **Coderingsproces** — de twee `/coderen-*` commands kunnen samengevoegd tot een, of blijven gescheiden per SKG-tabblad. De grootboekcodes zijn al uniek, dus samenvoegen is technisch mogelijk.
-6. **Migratiepad** — 2026 is al bezig. Samenvoegen kan per nieuw boekjaar (2027) of halverwege met data-migratie.
+Rij 1 = titel, data begint op rij 4.
 
-### Risico's
+### Overige beslissingen
 
-- **Complexiteit van de migratie** — alle formules, VLOOKUP's, en Apps Script functies moeten aangepast
-- **Terugvallen wordt lastig** — eenmaal samengevoegd is splitsen veel werk
-- **Debiteuren-sheet** — hangt nu aan exploitatie, moet mee in de nieuwe structuur
+- **Code 198** (sluitrekening) vervalt
+- **Name-masking** vervalt (namen gaan ongemaskeerd naar Claude)
+- **Een `/coderen` command** vervangt `/coderen-wijkkas` + `/coderen-exploitatie`
+- **Coderingsfuncties** werken op het actieve tabblad (gebruiker navigeert naar het juiste Journaal)
 
-## Besluit
+## Wat is klaar (op branch `samenvoegen`)
 
-Samenvoegen voor 2026 — geen externe vereisten, rapportage is intern, en het jaar is pas twee maanden oud. Afschriften worden opnieuw ingelezen. Op termijn kan zelfs een bankrekening worden opgeheven.
+### Scripts (klaar, nog niet getest in Google Sheets)
 
-## Implementatieplan
+- `scripts/codering.gs` -- export/import functies werken op actief Journaal-tabblad
+  - `exportOngecodeerd()` -- filtert ongecodeerde rijen
+  - `importGecodeerd()` -- slaat actief tabblad op, dialoog voor import
+  - `verwerkImport(tekst)` -- zet codes in kolom A, opmerkingen in kolom M
+  - `exportGecodeerd()` -- exporteert correcties uit kolom M
+  - `getActiveJournaal_()` -- valideert dat actief tabblad een Journaal is
+- `scripts/import-csv.gs` -- CSV direct naar Journaal-tabblad
+  - `importCSVWijkkas()` / `importCSVExploitatie()` -- entry-functies
+  - `importCSV_()` -- leest CSV, mapt kolommen naar journaalformaat, deduplicatie, vult VLOOKUP
+  - `csvToJournaal_()` -- kolommapping CSV -> journaal
+  - `buildKeyFromCSV_()` / `buildKeyFromJournaal_()` -- deduplicatiesleutels
+  - Script Properties: `importFolderIdWijkkas`, `processedFolderIdWijkkas`, `importFolderIdExploitatie`, `processedFolderIdExploitatie`
 
-### Stap 1: nieuwe sheet-structuur ontwerpen
+### Commands en documentatie (klaar)
 
-Een Google Sheet "Boekhouding 2026" met tabbladen:
+- `.claude/commands/coderen.md` -- gecombineerd codering-command
+- `.claude/commands/leer-codering.md` -- bijgewerkt (verwijst naar `/coderen`)
+- `docs/technisch/ontwerp-boekhouding-2026.md` -- ontwerpdocument (deels achterhaald door herziene structuur)
+- Alle docs bijgewerkt (bankafschriften-coderen, bankafschriften-importeren, csv-import-script, name-masking, coderingsschema, wekelijkse-taken, scripts/README, .claude/CLAUDE.md)
 
-| Tabblad | Bron | Toelichting |
-|---------|------|-------------|
-| SKG Wijkkas | nieuw | Import bankafschriften wijkkas-rekening |
-| SKG Exploitatie | nieuw | Import bankafschriften exploitatie-rekening |
-| Journaal | samengevoegd | Alle boekingen, beide rekeningen |
-| Kolommenbalans | samengevoegd | Automatisch over alle codes |
-| Jaarcijfers | samengevoegd | Een overzicht |
-| Kas | van exploitatie | Contant/Zettle, blijft nodig |
-| Verhuur&Buffet | van exploitatie | Factuuroverzicht, blijft nodig |
+### Verwijderd
 
-### Stap 2: grootboekcodes opschonen
+- `scripts/codering-wijkkas.gs`, `scripts/codering-exploitatie.gs`
+- `.claude/commands/coderen-wijkkas.md`, `.claude/commands/coderen-exploitatie.md`
+- Code 198 uit `docs/referentie/coderingsschema.md`
 
-- Code **198** (sluitrekening) is niet meer nodig — vervalt
-- Code **199** (kruisposten) blijft voor overboekingen naar/van spaarrekeningen
-- Overige codes overlappen niet en kunnen ongewijzigd mee
-- Optioneel: codes hernummeren zodat wijkkas en exploitatie in logische ranges vallen (maar niet strikt nodig)
+## Wat Jan moet doen
 
-### Stap 3: sheet bouwen (Jan, handmatig)
+1. **Google Sheet aanmaken** met de tabbladen uit de tabel hierboven
+2. **Grootboekschema** vullen (de xlsx in `taken/bronnen/boekhouding-2026.xlsx` bevat de gecombineerde codelijst, maar de sheet-structuur daarin is achterhaald)
+3. **Journaal-tabbladen** inrichten: titel op rij 1, data vanaf rij 4
+4. **Kolommenbalans** inrichten met SUMIF over "Journaal Wijkkas", "Journaal Exploitatie" en "Memoriaal"
+5. **Scripts kopieren** naar Apps Script-editor (`codering.gs` + `import-csv.gs`)
+6. **Script Properties** instellen (4 folder-ID's)
+7. **CSV's importeren** en testen of de import + codering werkt
+8. **Memoriaal** vullen (beginbalansen, correcties)
+9. **Oude sheets** archiveren
 
-1. Nieuwe sheet aanmaken of een van de twee hergebruiken
-2. Tabbladen inrichten met formules (VLOOKUP, kolommenbalans)
-3. Beide SKG-exports inlezen in de twee SKG-tabbladen
-4. Controleren dat kolommenbalans klopt
+## Nog te doen na testen
 
-### Stap 4: Apps Script aanpassen (Claude)
-
-- `scripts/codering.gs`: `exportOngecodeerd` en `importGecodeerd` moeten werken met twee SKG-tabbladen in een sheet
-- `scripts/import-csv.gs`: CSV import moet weten welk SKG-tabblad het doel is
-- Script Properties updaten voor de nieuwe sheet ID
-
-Concreet:
-- Neem `codering-exploitatie.gs` als basis (geen name-masking)
-- De functies werken al op "Journaal" — dat blijft hetzelfde
-- Verwijder `isOrganisatie`, `laadOrganisaties`, `setupOrganisaties` uit het script
-- In `import-csv.gs`: maak sheetnaam configureerbaar via Script Properties (of twee functies)
-
-### Stap 5: codering-commands samenvoegen (Claude)
-
-Een `/coderen` command dat alle ongecodeerde regels behandelt. De grootboekcodes zijn al uniek, dus alle patronen en leveranciers kunnen samengevoegd in een bestand.
-
-- Nieuw: `.claude/commands/coderen.md` (samenvoeging van wijkkas + exploitatie patronen)
-- Verwijderen: `.claude/commands/coderen-wijkkas.md` en `.claude/commands/coderen-exploitatie.md`
-- Bijwerken: `.claude/commands/leer-codering.md` (verwijst naar nieuw bestand)
-
-### Stap 6: name-masking verwijderen
-
-Maskering wordt achterwege gelaten. Naar Claude gaan alleen omschrijving + tegenpartijnaam (geen rekeningnummers, adressen, bedragen). De `isOrganisatie`-logica, `laadOrganisaties`, en `setupOrganisaties` functies worden verwijderd uit het Apps Script.
-
-Documentatie bijwerken:
-- `docs/technisch/name-masking.md` — verwijderen of vervangen door uitleg waarom het niet meer nodig is
-
-### Stap 7: documentatie bijwerken (Claude)
-
-- `docs/referentie/coderingsschema.md` — code 198 verwijderen
-- `docs/processen/bankafschriften-coderen.md` — nieuw proces (een command i.p.v. twee)
-- `docs/processen/bankafschriften-importeren.md` — een sheet i.p.v. twee
-- `docs/checklists/wekelijkse-taken.md` — verwijzingen updaten
-- `docs/technisch/name-masking.md` — verwijderen of archiveren
-- `docs/technisch/csv-import-script.md` — updaten
-- `scripts/README.md` — een script i.p.v. twee
-- `.claude/CLAUDE.md` — sheet-referenties en commands updaten
-- `MEMORY.md` — structuurwijzigingen
-
-### Stap 8: oude sheets archiveren (Jan)
-
-Wijkkas 2026 en Exploitatie 2026 markeren als "vervangen" maar bewaren als referentie.
-
-## Volgorde en rolverdeling
-
-| Stap | Wie | Afhankelijk van |
-|------|-----|-----------------|
-| 1 | Samen | — |
-| 2 | Samen | — |
-| 3 | Jan | 1, 2 |
-| 4 | Claude | 3 |
-| 5 | Claude | 2 |
-| 6 | Samen | 3 |
-| 7 | Claude | 3, 4, 5 |
-| 8 | Jan | 3 |
+- `docs/technisch/ontwerp-boekhouding-2026.md` bijwerken met definitieve structuur (geen SKG-tabbladen meer)
+- `docs/technisch/csv-import-script.md` bijwerken (schrijft naar Journaal i.p.v. SKG)
+- `docs/processen/bankafschriften-importeren.md` bijwerken (geen SKG-tabbladen meer)
+- Kolommenbalans-formules documenteren (SUMIF over drie tabbladen)
+- Committen en eventueel mergen naar main

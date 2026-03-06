@@ -1,40 +1,33 @@
 /**
- * Exporteert ongecodeerde SKG-regels uit het Journaal.
+ * Exporteert ongecodeerde regels uit het actieve Journaal-tabblad.
  * Toont een dialoog met per regel: rijnummer|omschrijving, naam
  * Klaar om te plakken in /coderen.
  *
- * Het rijnummer wordt meegestuurd zodat de gecodeerde output
- * via importGecodeerd() teruggezet kan worden op de juiste rij.
+ * Werkt op het actieve tabblad (Journaal Wijkkas of Journaal Exploitatie).
  */
 function exportOngecodeerd() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Journaal");
-  if (!sheet) {
-    SpreadsheetApp.getUi().alert("Tabblad 'Journaal' niet gevonden.");
-    return;
-  }
+  var sheet = getActiveJournaal_();
+  if (!sheet) return;
 
   var data = sheet.getDataRange().getValues();
   var regels = [];
 
-  for (var i = 1; i < data.length; i++) {
+  for (var i = 3; i < data.length; i++) { // data begint op rij 4 (index 3)
     var code = data[i][0];   // kolom A: grootboekcode
-    var bron = data[i][3];   // kolom D: bron
     var omschrijving = data[i][6]; // kolom G: omschrijving
     var naam = data[i][8];   // kolom I: naam begunstigde
     var rijnummer = i + 1;   // sheet-rijen zijn 1-based
 
-    if (code === "" && bron === "SKG") {
+    if (code === "" && omschrijving) {
       var delen = [];
-      if (omschrijving) delen.push(String(omschrijving).trim());
+      delen.push(String(omschrijving).trim());
       if (naam) delen.push(String(naam).trim());
-      if (delen.length > 0) {
-        regels.push(rijnummer + "|" + delen.join(", "));
-      }
+      regels.push(rijnummer + "|" + delen.join(", "));
     }
   }
 
   if (regels.length === 0) {
-    SpreadsheetApp.getUi().alert("Geen ongecodeerde SKG-regels gevonden.");
+    SpreadsheetApp.getUi().alert("Geen ongecodeerde regels gevonden in " + sheet.getName() + ".");
     return;
   }
 
@@ -50,22 +43,22 @@ function exportOngecodeerd() {
     .setWidth(600)
     .setHeight(400);
 
-  SpreadsheetApp.getUi().showModalDialog(html, regels.length + " ongecodeerde regels");
+  SpreadsheetApp.getUi().showModalDialog(html, sheet.getName() + ": " + regels.length + " ongecodeerde regels");
 }
 
 /**
- * Importeert gecodeerde regels terug in het Journaal.
+ * Importeert gecodeerde regels terug in het actieve Journaal-tabblad.
  * Verwacht per regel: rijnummer|code|opmerking (optioneel)
  *
  * - Zet de code in kolom A van de betreffende rij.
  * - Bij code 200 (Vraagposten): zet de opmerking in kolom M.
  */
 function importGecodeerd() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Journaal");
-  if (!sheet) {
-    SpreadsheetApp.getUi().alert("Tabblad 'Journaal' niet gevonden.");
-    return;
-  }
+  var sheet = getActiveJournaal_();
+  if (!sheet) return;
+
+  // Sla de tabblad-naam op zodat verwerkImport het juiste tabblad vindt
+  PropertiesService.getScriptProperties().setProperty("importTarget", sheet.getName());
 
   var htmlContent = ''
     + '<textarea id="invoer" style="width:100%;height:80%;font-family:monospace;font-size:13px;" '
@@ -89,20 +82,24 @@ function importGecodeerd() {
     .setWidth(600)
     .setHeight(400);
 
-  SpreadsheetApp.getUi().showModalDialog(html, "Gecodeerde regels importeren");
+  SpreadsheetApp.getUi().showModalDialog(html, sheet.getName() + ": gecodeerde regels importeren");
 }
 
 /**
  * Verwerkt de geplakte import-tekst.
  * Wordt aangeroepen vanuit de importGecodeerd-dialoog.
+ * Gebruikt het tabblad dat was opgeslagen bij het openen van de dialoog.
  */
 function verwerkImport(tekst) {
   if (!tekst) return "Geen invoer ontvangen.";
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Journaal");
+
+  var sheetName = PropertiesService.getScriptProperties().getProperty("importTarget");
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  if (!sheet) return "Tabblad '" + sheetName + "' niet gevonden.";
+
   var regels = tekst.trim().split("\n");
   var verwerkt = 0;
   var fouten = [];
-  var rijnummers = [];
 
   for (var i = 0; i < regels.length; i++) {
     var regel = regels[i].trim();
@@ -127,16 +124,10 @@ function verwerkImport(tekst) {
     if (code === 200 && opmerking) {
       sheet.getRange(rijnummer, 13).setValue(opmerking); // kolom M
     }
-    rijnummers.push(rijnummer);
     verwerkt++;
   }
 
-  // Sla geimporteerde rijnummers op voor exportGecodeerd
-  PropertiesService.getScriptProperties().setProperty(
-    "laatsteBatch", JSON.stringify(rijnummers)
-  );
-
-  var resultaat = verwerkt + " regels verwerkt.";
+  var resultaat = verwerkt + " regels verwerkt in " + sheetName + ".";
   if (fouten.length > 0) {
     resultaat += "\n\nFouten:\n" + fouten.join("\n");
   }
@@ -149,16 +140,13 @@ function verwerkImport(tekst) {
  * Klaar om te plakken in /leer-codering voor het bijwerken van patronen.
  */
 function exportGecodeerd() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Journaal");
-  if (!sheet) {
-    SpreadsheetApp.getUi().alert("Tabblad 'Journaal' niet gevonden.");
-    return;
-  }
+  var sheet = getActiveJournaal_();
+  if (!sheet) return;
 
   var data = sheet.getDataRange().getValues();
   var regels = [];
 
-  for (var i = 1; i < data.length; i++) {
+  for (var i = 3; i < data.length; i++) { // data begint op rij 4 (index 3)
     var toelichting = data[i][12]; // kolom M
     if (!toelichting || String(toelichting).trim() === "") continue;
 
@@ -175,7 +163,7 @@ function exportGecodeerd() {
   }
 
   if (regels.length === 0) {
-    SpreadsheetApp.getUi().alert("Geen regels met toelichting in kolom M gevonden.");
+    SpreadsheetApp.getUi().alert("Geen regels met toelichting in kolom M gevonden in " + sheet.getName() + ".");
     return;
   }
 
@@ -191,5 +179,23 @@ function exportGecodeerd() {
     .setWidth(600)
     .setHeight(400);
 
-  SpreadsheetApp.getUi().showModalDialog(html, regels.length + " regels met correcties/toelichting");
+  SpreadsheetApp.getUi().showModalDialog(html, sheet.getName() + ": " + regels.length + " regels met correcties");
+}
+
+/**
+ * Geeft het actieve tabblad terug als het een Journaal-tabblad is.
+ * Toont een foutmelding als het actieve tabblad geen Journaal is.
+ */
+function getActiveJournaal_() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var name = sheet.getName();
+  if (name.indexOf("Journaal") !== 0) {
+    SpreadsheetApp.getUi().alert(
+      "Dit werkt alleen op een Journaal-tabblad.\n" +
+      "Actief tabblad: " + name + "\n\n" +
+      "Ga naar 'Journaal Wijkkas' of 'Journaal Exploitatie'."
+    );
+    return null;
+  }
+  return sheet;
 }
