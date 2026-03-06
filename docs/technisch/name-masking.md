@@ -1,45 +1,12 @@
-# Name masking in het codeerproces
+# Name masking (niet meer actief)
 
-Bij het coderen van boekingen worden mutaties uit Google Sheets geexporteerd en aan Claude aangeboden. Persoonsnamen worden daarbij gemaskeerd om privacy te waarborgen: ze worden vervangen door het woord "persoon". Organisatienamen blijven zichtbaar omdat die nodig zijn voor correcte codering.
+Voorheen werden persoonsnamen in de wijkkas-export gemaskeerd als "persoon" voordat data naar Claude ging. Dit gebeurde via de functies `isOrganisatie()`, `laadOrganisaties()` en `setupOrganisaties()` in `codering-wijkkas.gs`.
 
-## Waar is masking actief?
+## Waarom is dit vervallen?
 
-| Sheet | exportOngecodeerd | exportGecodeerd | Reden |
-|---|---|---|---|
-| Wijkkas | Ja | Ja | Merendeel van boekingen is van/naar particulieren (giften, collectebonnen) |
-| Exploitatie | Nee | Nee | Merendeel van boekingen is van/naar bedrijven en stichtingen |
+Bij de samenvoeging van de wijkkas- en exploitatie-sheets tot "Boekhouding 2026" is besloten name-masking te laten vervallen:
 
-## Hoe werkt het?
-
-De functie `isOrganisatie(naam, organisatieLijst)` bepaalt of een naam een organisatie is. Als dat niet het geval is, wordt de naam vervangen door "persoon".
-
-Herkenning gaat op twee manieren:
-
-1. **Trefwoorden** — als de naam een van deze trefwoorden bevat, is het een organisatie:
-   - `b.v.`, `stichting`, `gemeente`, `diaconie`, `fonds`, `genootschap`, `dienstenorganisatie`, `fa.`
-   - `kerk` en `bv` worden met woordgrens-matching herkend (zodat "Kerkhof" geen match is)
-
-2. **Organisatielijst** — een lijst van specifieke organisatienamen die niet via trefwoorden herkend worden. Deze staat opgeslagen in Script Properties onder de sleutel `organisaties`.
-
-## Organisatielijst beheren
-
-De organisatielijst wordt beheerd via de functie `setupOrganisaties()` in `codering-wijkkas.gs`. Deze functie slaat een JSON-array op in Script Properties.
-
-Nieuwe organisatie toevoegen:
-1. Open de Apps Script-editor in de Wijkkas-sheet
-2. Voeg de naam toe aan de array in `setupOrganisaties()`
-3. Voer `setupOrganisaties()` uit om de lijst op te slaan
-
-## Voorbeeld
-
-Invoer uit het Journaal:
-```
-Rij 42: omschrijving="Collectebonnen", naam="Piet Jansen"
-Rij 43: omschrijving="Factuur verhuur", naam="Beukers Bouwt"
-```
-
-Na export met masking:
-```
-42|Collectebonnen, persoon
-43|Factuur verhuur, Beukers Bouwt
-```
+1. **Namen zijn essentieel voor codering** -- tegenpartijnamen zijn het primaire herkenningspatroon voor veel codes (bijv. "Sligro" -> 450, "Care" -> 460)
+2. **Geen gevoelige data** -- het Journaal bevat geen IBAN's, adressen of financiele details. Alleen namen, omschrijvingen en bedragen
+3. **Onderhoudslast** -- de organisatielijst moest handmatig bijgehouden worden via `setupOrganisaties()`
+4. **Inconsistentie** -- de exploitatie-sheet had al geen masking, wat tot verwarring leidde bij het samenvoegen

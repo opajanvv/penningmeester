@@ -47,8 +47,8 @@ Zie voor details: `../processen/betalen-facturen.md` en `../processen/declaratie
 
 ## How-to: Transacties wijkkas controleren
 
-1. Open de Google Sheet **Wijkkas**
-2. Bekijk de nieuwe (ongecodeerde) regels — snelle visuele scan
+1. Open de Google Sheet **Boekhouding 2026**
+2. Bekijk de nieuwe (ongecodeerde) regels in het Journaal — snelle visuele scan
 3. Let specifiek op **"Kerkelijke bijdrage"** of **"Kerkbalans"** in de omschrijving:
    - Deze horen niet op de wijkkas maar op de **PgH-rekening**
    - Stort het bedrag door naar PgH

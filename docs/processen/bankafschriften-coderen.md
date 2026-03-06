@@ -2,21 +2,22 @@
 
 Nieuwe SKG-boekingen in het Journaal krijgen nog geen grootboekcode. Dit proces wijst die codes toe via Claude, en importeert ze terug in de sheet.
 
-Dit hoeft niet wekelijks — mag een week worden overgeslagen.
+Dit hoeft niet wekelijks -- mag een week worden overgeslagen.
 
-De broncode van de scripts staat in `scripts/codering-wijkkas.gs` (met naammaskering) en `scripts/codering-exploitatie.gs` (zonder naammaskering).
+De broncode van het script staat in `scripts/codering.gs`.
 
 ## Stap 1: Export ongecodeerde regels
 
-1. Open de **Wijkkas-sheet** (of Exploitatie-sheet)
+1. Open de sheet **Boekhouding 2026**
 2. Ga naar **Extensies > Apps Script-menu** bovenin de sheet
 3. Kies **Exporteer ongecodeerd**
 4. Het script filtert het Journaal op rijen met lege code (kolom A) en bron "SKG"
 5. Er verschijnt een dialoog met regels in dit formaat:
 
 ```
-42|Collectebonnen, persoon
+42|Collectebonnen, J. de Vries
 43|SKG Collect S265 - Batch 1688, SKG COLLECT
+44|factuur schoonmaak periode 12, Care
 ```
 
 6. Selecteer alles en kopieer
@@ -26,16 +27,10 @@ De broncode van de scripts staat in `scripts/codering-wijkkas.gs` (met naammaske
 Plak de gekopieerde regels in Claude Code:
 
 ```
-/coderen-wijkkas
-42|Collectebonnen, persoon
+/coderen
+42|Collectebonnen, J. de Vries
 43|SKG Collect S265 - Batch 1688, SKG COLLECT
-```
-
-Of voor de exploitatierekening:
-
-```
-/coderen-exploitatie
-42|Factuur Care schoonmaak, Care BV
+44|factuur schoonmaak periode 12, Care
 ```
 
 Claude geeft twee blokken terug: een leesbaar overzicht en een **import-blok**.
@@ -70,15 +65,15 @@ Boekingen met code 200 zijn nog niet definitief. Zoek de juiste code op via het 
 
 ## Stap 6: Leerslag (periodiek)
 
-Na het verwerken van correcties en vraagposten kan Claude de coderingspatronen verbeteren. Dit hoeft niet elke keer — doe het als er meerdere correcties zijn geweest.
+Na het verwerken van correcties en vraagposten kan Claude de coderingspatronen verbeteren. Dit hoeft niet elke keer -- doe het als er meerdere correcties zijn geweest.
 
 1. Kies **Exporteer gecorrigeerd** in het Apps Script-menu
 2. Dit exporteert alle regels met een toelichting in kolom M
 3. Kopieer de output en geef die aan Claude:
 
 ```
-/leer-codering wijkkas
-27|210|persoon|geen omschrijving, is gift
+/leer-codering
+27|210|J. de Vries|geen omschrijving, is gift
 67|225|Nepal, persoon|doorzendcollecte voor Nepal
 ```
 
@@ -86,12 +81,9 @@ Claude stelt voor welke patronen aan de coderingsregel worden toegevoegd.
 
 ## Gevoelige data
 
-Het Journaal bevat geen IBAN's of adressen — alleen namen, omschrijvingen en bedragen. Namen van tegenpartijen worden meegestuurd naar Claude omdat ze nodig zijn voor de codering (bijv. "Sligro" → inkoop buffet, "Care" → schoonmaak).
-
-Bij de wijkkas worden persoonsnamen vervangen door "persoon" voordat de data naar Claude gaat. Zie [name masking](../technisch/name-masking.md) voor de werking.
+Het Journaal bevat geen IBAN's of adressen -- alleen namen, omschrijvingen en bedragen. Namen van tegenpartijen worden ongemaskeerd meegestuurd naar Claude omdat ze nodig zijn voor correcte codering (bijv. "Sligro" -> inkoop buffet, "Care" -> schoonmaak).
 
 ## Zie ook
 
-- [Coderingsschema](../referentie/coderingsschema.md) — overzicht van alle codes
-- [Name masking](../technisch/name-masking.md) — waarom persoonsnamen worden gemaskeerd
+- [Coderingsschema](../referentie/coderingsschema.md) -- overzicht van alle codes
 - [Wekelijkse taken](../checklists/wekelijkse-taken.md)

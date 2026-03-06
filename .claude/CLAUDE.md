@@ -28,7 +28,7 @@
 
 ## Commands
 
-Dit project heeft 8 commands in `.claude/commands/`. Ze vallen in drie groepen:
+Dit project heeft 7 commands in `.claude/commands/`. Ze vallen in drie groepen:
 
 ### Documentatie bijwerken
 
@@ -43,9 +43,8 @@ Dit project heeft 8 commands in `.claude/commands/`. Ze vallen in drie groepen:
 
 ### Coderen (boekhouding)
 
-- `/coderen-wijkkas` — Wijs grootboekcodes toe aan ongecodeerde wijkkas-boekingen.
-- `/coderen-exploitatie` — Wijs grootboekcodes toe aan ongecodeerde exploitatie-boekingen.
-- `/leer-codering <wijkkas|exploitatie>` — Verwerk correcties om de coderingspatronen te verbeteren.
+- `/coderen` — Wijs grootboekcodes toe aan ongecodeerde boekingen (wijkkas en exploitatie gecombineerd).
+- `/leer-codering` — Verwerk correcties om de coderingspatronen te verbeteren.
 
 ### Typische workflow
 
@@ -53,19 +52,17 @@ Dit project heeft 8 commands in `.claude/commands/`. Ze vallen in drie groepen:
 2. `/kies` — Kies een taak om op te pakken
 3. `/refine` — Verfijn de taak indien nodig
 4. `/doe <code>` — Werk de taak uit
-5. `/coderen-wijkkas` of `/coderen-exploitatie` — Codeer nieuwe boekingen
+5. `/coderen` — Codeer nieuwe boekingen
 6. `/leer-codering` — Verbeter patronen na correcties
 7. `/interview` — Vul ontbrekende kennis aan
 
 ## Sheet-referenties
 
-- **Locatie**: `taken/bronnen/`
-- **Bestanden**: `wijkkas.ods`, `exploitatie.ods`, `debiteuren.ods`, `koster-JJJJ-MM.ods` (per maand)
-- **Inhoud**: complete export (alle tabbladen), focus op structuur en formules, data hoeft niet actueel
-- **Wanneer**: Jan exporteert deze als er een taak is die inzicht in de sheet vereist
+- **Sheet**: Boekhouding 2026 (samenvoeging wijkkas + exploitatie)
+- **Tabbladen**: SKG Wijkkas, SKG Exploitatie, Journaal, Kolommenbalans, Jaarcijfers, Kas, Verhuur&Buffet
+- **Lokale exports**: `taken/bronnen/` -- Jan exporteert als een taak inzicht in de sheet vereist
 
 ## Scripts
 
 - Bij nieuwe scripts: gebruik configuratie (Script Properties, env vars) voor IDs en paden vanaf het begin, niet hardcoded waarden.
-- Bij nieuwe export-functies in Apps Script: name-masking is standaard vereist. Persoonsnamen worden gemaskeerd voordat data naar Claude gaat.
-- Bij nieuwe features die zowel wijkkas als exploitatie raken: ontwerp eerst de gedeelde structuur, bouw dan de varianten. Voorkom achteraf splitsen.
+- Name-masking is niet meer actief. Namen gaan ongemaskeerd naar Claude (nodig voor correcte codering).

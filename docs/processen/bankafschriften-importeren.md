@@ -10,7 +10,7 @@ Ga naar **Afschriften > Rekeningafschriften**.
 
 ## Stap 2: Selecteer de rekening
 
-Kies de juiste rekening:
+Kies de juiste rekening (herhaal stap 2-5 voor beide):
 - **PWG Bethlehemkerk expl.geb.** (exploitatie)
 - **PWG De Lichtbron wijkkas** (wijkkas)
 
@@ -43,13 +43,14 @@ De CSV exporteer je **niet** via Rekeningafschriften, maar via het Mutaties-sche
 
 ## Stap 5: Importeer CSV in Google Sheets
 
-De sheets voor Wijkkas en Exploitatie hebben een Apps Script voor het inlezen van CSV's:
+De sheet Boekhouding 2026 heeft twee importfuncties in het Apps Script-menu:
 
-1. Open de sheet (Wijkkas of Exploitatie)
-2. Klik op de knop **"CSV importeren"**
-3. Het script leest automatisch alle CSV-bestanden uit de map Bankafschriften
-4. Verwerkte CSV's worden verplaatst naar de submap `Ingelezen CSV's` (om dubbel verwerken te voorkomen)
-5. Bij meerdere CSV's worden ze in de juiste volgorde verwerkt
+1. Open de sheet **Boekhouding 2026**
+2. Kies **CSV importeren Wijkkas** of **CSV importeren Exploitatie**
+3. Het script leest automatisch alle CSV-bestanden uit de betreffende Drive-map
+4. Data komt in het tabblad **SKG Wijkkas** resp. **SKG Exploitatie**
+5. Verwerkte CSV's worden verplaatst naar de submap `Ingelezen CSV's` (om dubbel verwerken te voorkomen)
+6. Bij meerdere CSV's worden ze in de juiste volgorde verwerkt
 
 ## Stap 6: Saldocheck
 

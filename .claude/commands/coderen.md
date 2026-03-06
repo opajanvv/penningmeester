@@ -1,10 +1,10 @@
-# coderen-wijkkas
+# coderen
 
 Input: $ARGUMENTS
 
 ## Doel
 
-Bepaal de juiste grootboekrekening voor nieuwe boekingen van de wijkkas op basis van omschrijving en tegenpartij.
+Bepaal de juiste grootboekrekening voor nieuwe boekingen op basis van omschrijving en tegenpartij. Alle codes (wijkkas en exploitatie) staan in een gecombineerde sheet "Boekhouding 2026".
 
 ## Gebruik
 
@@ -12,20 +12,22 @@ Input komt uit het Apps Script `exportOngecodeerd()` in de Google Sheet.
 Elke regel heeft het formaat: `rijnummer|omschrijving, naam`
 
 ```
-/coderen-wijkkas
+/coderen
 23|Vaste kosten voor 2026 - Rekening-courant
 24|Wijkkas, M. Kuyvenhoven-Kok
 25|SKG Collect S265 - Batch 1688, SKG COLLECT
+42|factuur schoonmaak periode 12, Care
+43|parkeervergunning 11, Stichting Derdengelden Parkeer Service
 ```
 
 Of zonder rijnummers voor losse invoer:
 ```
-/coderen-wijkkas gift wijkkas, Hr Van Lambalgen
+/coderen gift wijkkas, Hr Van Lambalgen
 ```
 
 ## Coderingsregels
 
-### Opbrengsten
+### Wijkkas - Opbrengsten
 
 | Code | Naam | Patroon |
 |------|------|---------|
@@ -40,7 +42,7 @@ Of zonder rijnummers voor losse invoer:
 | 265 | Subsidies Kerktuin | Oranje Fonds, NLdoet, subsidie kerktuin |
 | 290 | Overige baten | ondersteuning activiteiten, gemeenschapsactiviteiten, sponsoring, contante schenking |
 
-### Kosten wijkkerkenraad en predikant
+### Wijkkas - Kosten wijkkerkenraad en predikant
 
 | Code | Naam | Patroon |
 |------|------|---------|
@@ -49,10 +51,10 @@ Of zonder rijnummers voor losse invoer:
 | 302 | Kosten drukwerk | drukkosten, Practicum Print, Laposta, najaarsbrief, paasnummer, flyers |
 | 303 | Abonnementen | VBK media, Woord en Dienst, Ouderlingenblad, Liedboek online |
 | 304 | Kosten vrijwilligers | vrijwilligersvergoeding, organisten |
-| 305 | Bankkosten | bankkosten, portokosten |
+| 305 | Bankkosten wijkkas | bankkosten wijkkas, portokosten |
 | 307 | Kosten Internet/telefoon en website | Micro-Projects, HBBZ, Argeweb, Webheld, Schaapsound, wifi |
 
-### Kosten eredienst
+### Wijkkas - Kosten eredienst
 
 | Code | Naam | Patroon |
 |------|------|---------|
@@ -61,7 +63,7 @@ Of zonder rijnummers voor losse invoer:
 | 314 | Kosten kerktelefoon/televisie | Kerkdienst Gemist |
 | 319 | Overige kosten eredienst | avondmaalbekertjes, avondmaalvuller |
 
-### Kosten activiteiten
+### Wijkkas - Kosten activiteiten
 
 | Code | Naam | Patroon |
 |------|------|---------|
@@ -71,31 +73,79 @@ Of zonder rijnummers voor losse invoer:
 | 333 | Attenties bij verjaardagen e.d. | bloemen sectie, Flyerzone, attenties sectiewerk |
 | 334 | Kerstattenties | kerst presentje, kerstviering senioren |
 
-### Overige kosten
+### Wijkkas - Overige kosten
 
 | Code | Naam | Patroon |
 |------|------|---------|
-| 360 | Overige diverse kosten | Piano Select, jeugdruimte, theelichtglazen, parkeervergunning, training, drumstel |
+| 360 | Overige diverse kosten wijkkas | Piano Select, jeugdruimte, theelichtglazen, parkeervergunning, training, drumstel |
 | 364 | Kopieermachine | kopieermachine, printer, toner |
 | 365 | Kerktuin | kerktuin, Anneke Beemer, TOMA Bloemenservice, Puik tuincentrum, Smits tuinen, compost, gieters, regentonnen |
 | 370 | Paaskaars | paaskaars, BOCA Kaarsengroep, jubelkaars |
 
-### Interne boekingen
+### Wijkkas - Interne boekingen
 
 | Code | Naam | Patroon |
 |------|------|---------|
-| 199 | Kruisposten | correctie, kruispost, foutief geboekt |
+| 199 | Kruisposten | correctie, kruispost, foutief geboekt, collectebonnen (kruispost) |
 | 392 | Kerkbalans (naar PGH) | kerkbalans, kerkelijke bijdrage, vrijwillige vaste bijdrage (naar PGH) |
 | 402 | Wijkkas naar PGH | wijkkas naar PGH, kinderkoor |
 | 407 | Kerststal | kerststal |
 
+### Exploitatie - Opbrengsten
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 140 | Debiteuren verhuur/buffet BK | factuurnummer JJJJMM-NNN (bijv. 202601-013), VvE/VVE, zaalhuur, huur (van huurder), St. Inovum, HilverZorg, Sonnevelt, De Gitaarleraar, Prestige Vocal, Con Amore, Alzheimer, HENGELSPORTVER, COV HILVERSUM |
+| 404 | Verhuur ruimte pedicure | pedicure, pedicureruimte |
+| 410 | Buffet op rekening | Drankopbrengst (Steenvoorden) |
+| 411 | Buffet contant | Kasafdracht (Van Vliet) |
+| 412 | Buffet PIN | PAYPAL, PayPal |
+| 428 | Opbrengst bazar | Verkoop (marktplaats, bazar) |
+
+### Exploitatie - Kosten buffet
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 450 | Inkoop buffet | Sligro, FAJE catering, Party en Cateringservice, Teastreet, Zavor Coffee, boodschappen kerk, koekjes |
+| 455 | Afrekening personeelskosten koster | personeelskosten koster, kostervergoeding |
+
+### Exploitatie - Kosten gebouw
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 460 | Kosten schoonmaakbedrijf | Care, Boozt24 Finance |
+| 560 | Schoonmaakartikelen | GPH Schoonmaakartikelen |
+| 562 | Kosten vuilafvoer | Renewi |
+| 574 | Kleine aanschaf | keukengerei, kleine apparatuur |
+| 579 | Overige onderhoudskosten | Micro-Projects, onderhoud apparatuur |
+| 589 | Kosten tuinonderhoud | TOMA Bloemenservice, ISERO, tuin, bollen |
+| 600 | Kosten parkeervoorziening | Parkeer Service, parkeervergunning |
+
+### Exploitatie - Overige kosten
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 470 | Onderhoud vleugel/piano | Piano Select, pianostemmer |
+| 480 | Bankkosten exploitatie | Bankkosten exploitatie, portokosten |
+| 481 | Kantoorartikelen | 123inkt |
+| 482 | Vergoeding vrijwilligers | vrijwilligersvergoeding, Verschoof |
+| 489 | Overige diverse kosten exploitatie | telefoon abonnement, overige |
+
+### Exploitatie - Interne boekingen
+
+| Code | Naam | Patroon |
+|------|------|---------|
+| 129 | Spaargeld Centraal | Afstorting saldo, interne overboeking naar spaar |
+| 199 | Kruisposten | correctie, kruispost, doorzendcollecte (naar wijkkas) |
+
 ## Prioriteit matching
 
-1. **Omschrijving boven leverancier** - Als de omschrijving een duidelijk patroon bevat, gebruik dat (bijv. Micro-Projects + "orgel" = 311, niet 307)
-2. **Specifieke namen** - SKG Collect, Kerkdienst Gemist, specifieke leveranciers (alleen als omschrijving geen ander patroon geeft)
-3. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
-4. **Geen of vage omschrijving** - Als er geen duidelijke omschrijving is, default naar gift (210)
-5. **Bij twijfel** - Geef code 200 (Vraagposten) met opties
+1. **Factuurnummerformaat** - Omschrijving bevat JJJJMM-NNN (bijv. 202601-013) -> 140 (verhuurfactuur)
+2. **Omschrijving boven leverancier** - Als de omschrijving een duidelijk patroon bevat, gebruik dat (bijv. Micro-Projects + "orgel" = 311, niet 307)
+3. **Tegenpartij** - Exacte of gedeeltelijke match op naam
+4. **Keywords in omschrijving** - collectebonnen, gift, drukkosten, etc.
+5. **Geen of vage omschrijving** - Als er geen duidelijke omschrijving is, default naar gift (210)
+6. **Bij twijfel** - Geef code 200 (Vraagposten) met opties
 
 ## Output formaat
 
@@ -107,10 +157,12 @@ Per regel: `rijnummer: CODE NAAM | omschrijving | tegenpartij`
 Bij twijfel: markeer met `?` en geef opties.
 
 ```
-23: 305 Bankkosten | Vaste kosten voor 2026 - Rekening-courant
+23: 305 Bankkosten wijkkas | Vaste kosten voor 2026 - Rekening-courant
 24: 210 Giften wijkkas | Wijkkas | M. Kuyvenhoven-Kok
 25: 220 Collecte voor de wijkkas | SKG Collect Batch 1688 | SKG COLLECT
-49: 200 Vraagposten | Erven mw NJ Ridder: nalatenschap (73) of gift (210)?
+42: 460 Kosten schoonmaakbedrijf | factuur schoonmaak periode 12 | Care
+43: 600 Kosten parkeervoorziening | parkeervergunning 11 | Stichting Derdengelden Parkeer Service
+49: 200 Vraagposten | onbekende boeking | Onbekend bedrijf?
 ```
 
 ### 2. Import-blok
@@ -123,7 +175,9 @@ De opmerking is alleen nodig bij code 200 (twijfelgevallen).
 23|305|
 24|210|
 25|220|
-49|200|Erven mw NJ Ridder: nalatenschap (73) of gift (210)?
+42|460|
+43|600|
+49|200|Onbekende boeking: verhuur (140) of overig (489)?
 ```
 
 ### Twijfelgevallen

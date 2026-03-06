@@ -9,9 +9,9 @@ Werk de patronen in een coderen-skill bij op basis van gecorrigeerde boekingen. 
 ## Gebruik
 
 ```
-/leer-codering wijkkas
+/leer-codering
 27|210|W. Triemstra e/o B. Triemstra-Wagenaar|geen omschrijving, is gift
-67|205|Nepal, J.C. Duim-van Harn|doorzendcollecte voor Nepal
+67|225|Nepal, J.C. Duim-van Harn|doorzendcollecte voor Nepal
 50|300|declaratie borrel Communicatie-werkgroep, J van Veldhuizen|valt onder wijkkerkenraad
 ```
 
@@ -21,21 +21,17 @@ Formaat per regel: `rijnummer|code|omschrijving, naam|toelichting`
 
 De toelichting van de penningmeester geeft context over waarom deze code is gekozen.
 
-Het eerste woord na `/leer-codering` geeft aan welke skill bijgewerkt moet worden:
-- `wijkkas` -> `.claude/commands/coderen-wijkkas.md`
-- `exploitatie` -> `.claude/commands/coderen-exploitatie.md`
-
 ## Instructies
 
-1. Lees de huidige skill (`.claude/commands/coderen-wijkkas.md` of `coderen-exploitatie.md`).
-2. Vergelijk elke regel uit de input met de bestaande patronen in de skill.
+1. Lees de huidige skill (`.claude/commands/coderen.md`).
+2. Vergelijk elke regel uit de input met de bestaande patronen in `.claude/commands/coderen.md`.
 3. Identificeer **nieuwe patronen** -- boekingen die niet door de bestaande patronen gedekt worden:
    - Nieuwe trefwoorden in omschrijvingen
    - Nieuwe tegenpartij-namen
    - Nieuwe combinaties die tot een specifieke code leiden
 4. Identificeer **correcties** -- gevallen waar de bestaande patronen tot een verkeerde code zouden leiden.
 5. Als de coderen skill de juiste code oplevert, dan hoeft er **niets** te gebeuren.
-6. Als de coderen skill een andere code opelevert, Stel dan concrete wijzigingen voor aan de patroontabellen in de skill, zodat het volgende keer beter gaat.
+6. Als de coderen skill een andere code oplevert, stel dan concrete wijzigingen voor aan de patroontabellen in de skill, zodat het volgende keer beter gaat.
 7. Voer de wijzigingen door na bevestiging door Jan.
 
 ## Wat niet aanpassen

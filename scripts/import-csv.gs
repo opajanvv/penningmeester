@@ -1,16 +1,31 @@
 /**
- * Imports CSVs alphabetically.
+ * Importeert CSV's in SKG Wijkkas.
+ * Leest folder-ID's uit Script Properties: importFolderIdWijkkas, processedFolderIdWijkkas.
+ */
+function importCSVWijkkas() {
+  importCSV_('importFolderIdWijkkas', 'processedFolderIdWijkkas', 'SKG Wijkkas');
+}
+
+/**
+ * Importeert CSV's in SKG Exploitatie.
+ * Leest folder-ID's uit Script Properties: importFolderIdExploitatie, processedFolderIdExploitatie.
+ */
+function importCSVExploitatie() {
+  importCSV_('importFolderIdExploitatie', 'processedFolderIdExploitatie', 'SKG Exploitatie');
+}
+
+/**
+ * Imports CSVs alphabetically into the given sheet tab.
  * Uses Sheet locale settings to handle semicolons and commas automatically.
  *
- * Vereist Script Properties:
- *   importFolderId      - Google Drive map met nieuwe CSV's
- *   processedFolderId   - Google Drive map voor verwerkte CSV's
+ * Vereist Script Properties per rekening:
+ *   importFolderId[Wijkkas|Exploitatie]      - Google Drive map met nieuwe CSV's
+ *   processedFolderId[Wijkkas|Exploitatie]    - Google Drive map voor verwerkte CSV's
  */
-function importCSV() {
+function importCSV_(folderProp, processedProp, sheetName) {
   var props = PropertiesService.getScriptProperties();
-  const folderId = props.getProperty('importFolderId');
-  const processedFolderId = props.getProperty('processedFolderId');
-  const sheetName = 'SKG';
+  const folderId = props.getProperty(folderProp);
+  const processedFolderId = props.getProperty(processedProp);
 
   if (!folderId || !processedFolderId) {
     SpreadsheetApp.getUi().alert("Script Properties 'importFolderId' en/of 'processedFolderId' niet ingesteld.");
@@ -60,21 +75,34 @@ function importCSV() {
 }
 
 /**
+ * TEST: Import met deduplicatie voor Wijkkas.
+ */
+function importCSVTestWijkkas() {
+  importCSVTest_('importFolderIdWijkkas', 'processedFolderIdWijkkas', 'SKG Wijkkas');
+}
+
+/**
+ * TEST: Import met deduplicatie voor Exploitatie.
+ */
+function importCSVTestExploitatie() {
+  importCSVTest_('importFolderIdExploitatie', 'processedFolderIdExploitatie', 'SKG Exploitatie');
+}
+
+/**
  * TEST: Import met deduplicatie.
  * Werkt met zowel afschriften als tussentijdse mutatieoverzichten.
  * Dubbele regels (op basis van datum, bedrag, tegenrekening, omschrijving) worden overgeslagen.
  * Als een mutatie eerder zonder afschriftnummer is geimporteerd, wordt het
  * afschriftnummer bijgewerkt zodra het afschrift binnenkomt.
  *
- * Vereist Script Properties:
- *   importFolderId      - Google Drive map met nieuwe CSV's
- *   processedFolderId   - Google Drive map voor verwerkte CSV's
+ * Vereist Script Properties per rekening:
+ *   importFolderId[Wijkkas|Exploitatie]      - Google Drive map met nieuwe CSV's
+ *   processedFolderId[Wijkkas|Exploitatie]    - Google Drive map voor verwerkte CSV's
  */
-function importCSVTest() {
+function importCSVTest_(folderProp, processedProp, sheetName) {
   var props = PropertiesService.getScriptProperties();
-  const folderId = props.getProperty('importFolderId');
-  const processedFolderId = props.getProperty('processedFolderId');
-  const sheetName = 'SKG';
+  const folderId = props.getProperty(folderProp);
+  const processedFolderId = props.getProperty(processedProp);
 
   if (!folderId || !processedFolderId) {
     SpreadsheetApp.getUi().alert("Script Properties 'importFolderId' en/of 'processedFolderId' niet ingesteld.");

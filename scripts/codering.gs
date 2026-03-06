@@ -1,7 +1,7 @@
 /**
  * Exporteert ongecodeerde SKG-regels uit het Journaal.
  * Toont een dialoog met per regel: rijnummer|omschrijving, naam
- * Klaar om te plakken in /coderen-exploitatie.
+ * Klaar om te plakken in /coderen.
  *
  * Het rijnummer wordt meegestuurd zodat de gecodeerde output
  * via importGecodeerd() teruggezet kan worden op de juiste rij.

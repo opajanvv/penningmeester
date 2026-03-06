@@ -34,7 +34,6 @@ Origineel PKN-document: [coderings-schema.pdf](coderings-schema.pdf)
 | 171 | Afdracht collectebonnen | Afdrachten aan centraal | Standaard |
 | 196 | Verrekeningen | Saldo per ultimo jaar van resultaat wijkkas en exploitatie met centraal | Standaard |
 | 197 | Saldo vorig jaar | | Standaard |
-| 198 | Sluitrekening exploitatie | Saldo per ultimo jaar van de exploitatie kerkgebouw | Standaard |
 | 199 | Kruisposten | Overboekingen tussen liquide middelen en spaargelden | Standaard |
 | 200 | Vraagposten | | Standaard |
 
@@ -173,7 +172,6 @@ Beide rekeningen werken identiek: ontvangsten én uitgaven boeken, einde jaar op
 | 150-159 | Vorderingen | Uitsluitend per einde boekjaar | Standaard |
 | 160-169 | Schulden | Uitsluitend per einde boekjaar | Standaard |
 | 197 | Saldo vorig jaar | | Standaard |
-| 198 | Sluitrekening wijkkas | Saldo per ultimo dat als reserve in wijkkas wordt opgenomen | Standaard |
 | 199 | Kruisposten | Overboekingen tussen liquide middelen | Standaard |
 | 200 | Vraagposten | | Standaard |
 

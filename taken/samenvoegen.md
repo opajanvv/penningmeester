@@ -1,6 +1,6 @@
 # Plan: samenvoegen wijkkas en exploitatie in een sheet
 
-**Status**: gepland, nog niet gestart
+**Status**: fase 3 en 4 uitgevoerd, fase 1 en 2 wachten op Jan
 
 ## Huidige situatie
 
