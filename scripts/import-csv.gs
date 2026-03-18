@@ -1,17 +1,21 @@
+// Folder-ID's voor CSV-import (Google Drive)
+var IMPORT_FOLDER_WIJKKAS = '1xrB4WtpGoS8EtpXc971X0osSF9H7YHS5';
+var PROCESSED_FOLDER_WIJKKAS = '1Gr97wgTjC227zLQegn0AEl47Wcmn6l8U';
+var IMPORT_FOLDER_EXPLOITATIE = '1qYuhNpnDJvzhZC9KVec3K-V89toiJmzG';
+var PROCESSED_FOLDER_EXPLOITATIE = '1dASRrGOE3bgGkeXsU9ICxdnErmTmXGla';
+
 /**
  * Importeert CSV's in Journaal Wijkkas.
- * Leest folder-ID's uit Script Properties: importFolderIdWijkkas, processedFolderIdWijkkas.
  */
 function importCSVWijkkas() {
-  importCSV_('importFolderIdWijkkas', 'processedFolderIdWijkkas', 'Journaal Wijkkas');
+  importCSV_(IMPORT_FOLDER_WIJKKAS, PROCESSED_FOLDER_WIJKKAS, 'Journaal Wijkkas');
 }
 
 /**
  * Importeert CSV's in Journaal Exploitatie.
- * Leest folder-ID's uit Script Properties: importFolderIdExploitatie, processedFolderIdExploitatie.
  */
 function importCSVExploitatie() {
-  importCSV_('importFolderIdExploitatie', 'processedFolderIdExploitatie', 'Journaal Exploitatie');
+  importCSV_(IMPORT_FOLDER_EXPLOITATIE, PROCESSED_FOLDER_EXPLOITATIE, 'Journaal Exploitatie');
 }
 
 /**
@@ -24,22 +28,13 @@ function importCSVExploitatie() {
  *   9: Woonplaats       10: Omschrijving       11+: overig
  *
  * Journaal-kolommen:
- *   A: grootboekcode (leeg)    B: VLOOKUP    C: datum    D: bron
- *   E: debet                   F: credit     G: omschrijving
- *   H: afschriftnr             I: naam begunstigde
+ *   A: grootboekcode (leeg)    B: VLOOKUP       C: afschriftnr
+ *   D: datum                   E: bij            F: af
+ *   G: omschrijving            H: naam tegenpartij
  *
- * Data begint op rij 4 (rij 1 = titel, 2-3 = leeg/headers).
+ * Data begint op rij 10.
  */
-function importCSV_(folderProp, processedProp, sheetName) {
-  var props = PropertiesService.getScriptProperties();
-  const folderId = props.getProperty(folderProp);
-  const processedFolderId = props.getProperty(processedProp);
-
-  if (!folderId || !processedFolderId) {
-    SpreadsheetApp.getUi().alert("Script Properties '" + folderProp + "' en/of '" + processedProp + "' niet ingesteld.");
-    return;
-  }
-
+function importCSV_(folderId, processedFolderId, sheetName, silent) {
   const folder = DriveApp.getFolderById(folderId);
   const files = folder.getFilesByType(MimeType.CSV);
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -55,25 +50,37 @@ function importCSV_(folderProp, processedProp, sheetName) {
   }
 
   if (fileList.length === 0) {
-    SpreadsheetApp.getUi().alert("Geen CSV's gevonden");
+    if (!silent) SpreadsheetApp.getUi().alert("Geen CSV's gevonden");
     return;
   }
 
   // Sort alphabetically so 2026001 comes before 2026002
   fileList.sort((a, b) => a.getName().localeCompare(b.getName()));
 
-  // Read existing data for deduplication
-  const lastRow = sheet.getLastRow();
-  const existingKeys = buildExistingKeys_(sheet, lastRow);
-
-  const rowsToAppend = [];
+  const DATA_START = 8;
+  let totalNew = 0;
   let skipped = 0;
   let updated = 0;
 
   fileList.forEach(file => {
+    // Herbereken deduplicatie-index voor elk bestand (na vorige write)
+    const lastRow = sheet.getLastRow();
+    const existingKeys = buildExistingKeys_(sheet, lastRow, DATA_START);
+
     const fileContent = file.getBlob().getDataAsString();
     let csvData = Utilities.parseCsv(fileContent, ';');
     csvData.shift(); // Remove header
+
+    // Keer bestand om als eerste datum nieuwer is dan laatste
+    if (csvData.length >= 2) {
+      const firstDate = normalizeDatum_(csvData[0][3]);
+      const lastDate = normalizeDatum_(csvData[csvData.length - 1][3]);
+      if (firstDate > lastDate) {
+        csvData.reverse();
+      }
+    }
+
+    const rowsToAppend = [];
 
     csvData.forEach(csvRow => {
       if (csvRow.length < 11) return;
@@ -81,11 +88,10 @@ function importCSV_(folderProp, processedProp, sheetName) {
       const key = buildKeyFromCSV_(csvRow);
 
       if (existingKeys.has(key)) {
-        // Check if we can update the afschriftnummer
         const existing = existingKeys.get(key);
         const hasNewNr = csvRow[0] !== '' && csvRow[1] !== '';
-        if (hasNewNr && !existing.hasAfschriftNr) {
-          sheet.getRange(existing.sheetRow, 8).setValue(csvRow[1]); // kolom H
+        if (hasNewNr && !existing.hasAfschriftNr && existing.sheetRow > 0) {
+          sheet.getRange(existing.sheetRow, 3).setValue(csvRow[1]); // kolom C
           existing.hasAfschriftNr = true;
           updated++;
         } else {
@@ -97,35 +103,48 @@ function importCSV_(folderProp, processedProp, sheetName) {
       }
     });
 
+    // Schrijf rijen van dit bestand naar de sheet
+    if (rowsToAppend.length > 0) {
+      const startRow = Math.max(sheet.getLastRow(), DATA_START - 1) + 1;
+      sheet.getRange(startRow, 1, rowsToAppend.length, 8).setValues(rowsToAppend);
+
+      const fmt = '"€ "#,##0.00;[Red]"€ -"#,##0.00';
+      sheet.getRange(startRow, 5, rowsToAppend.length, 2).setNumberFormat(fmt);
+
+      for (let i = 0; i < rowsToAppend.length; i++) {
+        const r = startRow + i;
+        sheet.getRange(r, 2).setFormula(
+          '=IFERROR(VLOOKUP(A' + r + ';Grootboekschema!$A1:$B;2;0); "")'
+        );
+      }
+      totalNew += rowsToAppend.length;
+    }
+
+    // Verplaats verwerkt bestand
     const processedFolder = DriveApp.getFolderById(processedFolderId);
     file.moveTo(processedFolder);
   });
 
-  // Batch append new rows
-  if (rowsToAppend.length > 0) {
-    const startRow = Math.max(lastRow, 3) + 1; // data begint op rij 4
-    const range = sheet.getRange(startRow, 1, rowsToAppend.length, 9); // kolom A t/m I
-    range.setValues(rowsToAppend);
+  var resultaat = {
+    nieuw: totalNew,
+    bijgewerkt: updated,
+    overgeslagen: skipped
+  };
 
-    // Zet VLOOKUP-formule in kolom B voor de nieuwe rijen
-    for (let i = 0; i < rowsToAppend.length; i++) {
-      const r = startRow + i;
-      sheet.getRange(r, 2).setFormula(
-        '=IFERROR(VLOOKUP(A' + r + ',Grootboekschema!$A:$B,2,0), "")'
-      );
-    }
+  if (!silent) {
+    SpreadsheetApp.getUi().alert(
+      'Import voltooid:\n' +
+      resultaat.nieuw + ' nieuwe regels\n' +
+      resultaat.bijgewerkt + ' afschriftnummers bijgewerkt\n' +
+      resultaat.overgeslagen + ' dubbele regels overgeslagen'
+    );
   }
 
-  SpreadsheetApp.getUi().alert(
-    'Import voltooid:\n' +
-    rowsToAppend.length + ' nieuwe regels\n' +
-    updated + ' afschriftnummers bijgewerkt\n' +
-    skipped + ' dubbele regels overgeslagen'
-  );
+  return resultaat;
 }
 
 /**
- * Converteert een CSV-rij naar een journaalrij (array van 9 kolommen A-I).
+ * Converteert een CSV-rij naar een journaalrij (array van 8 kolommen A-H).
  * Kolom B wordt als lege string gezet; de VLOOKUP wordt apart ingevuld.
  */
 function csvToJournaal_(csvRow) {
@@ -135,13 +154,12 @@ function csvToJournaal_(csvRow) {
   return [
     '',                                       // A: grootboekcode (leeg)
     '',                                       // B: VLOOKUP (wordt apart gezet)
-    csvRow[3],                                // C: datum
-    'SKG',                                    // D: bron
-    bedrag < 0 ? -bedrag : '',                // E: debet (negatief bedrag = uitgave)
-    bedrag >= 0 ? bedrag : '',                // F: credit (positief bedrag = ontvangst)
+    csvRow[1] || '',                          // C: afschriftnr
+    csvRow[3],                                // D: datum
+    bedrag >= 0 ? bedrag : '',                // E: bij (positief bedrag = ontvangst)
+    bedrag < 0 ? -bedrag : '',                // F: af (negatief bedrag = uitgave)
     csvRow[10] || '',                         // G: omschrijving
-    csvRow[1] || '',                          // H: afschriftnummer
-    csvRow[7] || ''                           // I: naam begunstigde
+    csvRow[7] || ''                           // H: naam tegenpartij
   ];
 }
 
@@ -149,21 +167,18 @@ function csvToJournaal_(csvRow) {
  * Bouwt een deduplicatie-index van bestaande journaalrijen.
  * Returns Map<string, {sheetRow, hasAfschriftNr}>
  */
-function buildExistingKeys_(sheet, lastRow) {
+function buildExistingKeys_(sheet, lastRow, dataStart) {
   const keys = new Map();
-  if (lastRow < 4) return keys; // geen data
+  if (lastRow < dataStart) return keys; // geen data
 
-  const data = sheet.getRange(4, 1, lastRow - 3, 9).getValues(); // A-I, vanaf rij 4
+  const data = sheet.getRange(dataStart, 1, lastRow - dataStart + 1, 8).getValues(); // A-H
 
   for (let i = 0; i < data.length; i++) {
     const row = data[i];
-    // Alleen SKG-rijen dedupliceren
-    if (row[3] !== 'SKG') continue;
-
     const key = buildKeyFromJournaal_(row);
     keys.set(key, {
-      sheetRow: i + 4, // 1-based sheet rij
-      hasAfschriftNr: row[7] !== '' && row[7] !== null
+      sheetRow: i + dataStart, // 1-based sheet rij
+      hasAfschriftNr: row[2] !== '' && row[2] !== null // kolom C
     });
   }
   return keys;
@@ -180,23 +195,23 @@ function buildKeyFromCSV_(csvRow) {
 }
 
 /**
- * Deduplicatie-sleutel vanuit een bestaande journaalrij (kolom A-I als array).
- * Reconstrueert het originele bedrag uit debet (E=4) en credit (F=5).
+ * Deduplicatie-sleutel vanuit een bestaande journaalrij (kolom A-H als array).
+ * Reconstrueert het originele bedrag uit bij (E=4) en af (F=5).
  */
 function buildKeyFromJournaal_(row) {
-  let datum = normalizeDatum_(row[2]); // kolom C
-  // Reconstrueer bedrag: debet = negatief, credit = positief
-  let debet = row[4]; // kolom E
-  let credit = row[5]; // kolom F
+  let datum = normalizeDatum_(row[3]); // kolom D
+  // Reconstrueer bedrag: bij = positief, af = negatief
+  let bij = row[4]; // kolom E
+  let af = row[5]; // kolom F
   let bedrag;
-  if (debet !== '' && debet !== null && debet !== 0) {
-    bedrag = (-Number(debet)).toFixed(2);
-  } else if (credit !== '' && credit !== null && credit !== 0) {
-    bedrag = Number(credit).toFixed(2);
+  if (af !== '' && af !== null && af !== 0) {
+    bedrag = (-Number(af)).toFixed(2);
+  } else if (bij !== '' && bij !== null && bij !== 0) {
+    bedrag = Number(bij).toFixed(2);
   } else {
     bedrag = '0.00';
   }
-  return [datum, bedrag, String(row[6]).trim(), String(row[8]).trim()].join('|');
+  return [datum, bedrag, String(row[6]).trim(), String(row[7]).trim()].join('|');
 }
 
 /**

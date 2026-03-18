@@ -12,17 +12,18 @@ function exportOngecodeerd() {
   var data = sheet.getDataRange().getValues();
   var regels = [];
 
-  for (var i = 3; i < data.length; i++) { // data begint op rij 4 (index 3)
+  for (var i = 7; i < data.length; i++) { // data begint op rij 8 (index 7)
     var code = data[i][0];   // kolom A: grootboekcode
     var omschrijving = data[i][6]; // kolom G: omschrijving
-    var naam = data[i][8];   // kolom I: naam begunstigde
+    var naam = data[i][7];   // kolom H: naam tegenpartij
     var rijnummer = i + 1;   // sheet-rijen zijn 1-based
 
-    if (code === "" && omschrijving) {
+    var datum = data[i][3];  // kolom D: datum
+    if (code === "" && datum) {
       var delen = [];
-      delen.push(String(omschrijving).trim());
+      if (omschrijving) delen.push(String(omschrijving).trim());
       if (naam) delen.push(String(naam).trim());
-      regels.push(rijnummer + "|" + delen.join(", "));
+      regels.push(rijnummer + "|" + (delen.length > 0 ? delen.join(", ") : "(geen omschrijving)"));
     }
   }
 
@@ -51,7 +52,7 @@ function exportOngecodeerd() {
  * Verwacht per regel: rijnummer|code|opmerking (optioneel)
  *
  * - Zet de code in kolom A van de betreffende rij.
- * - Bij code 200 (Vraagposten): zet de opmerking in kolom M.
+ * - Bij code 200 (Vraagposten): zet de opmerking in kolom I.
  */
 function importGecodeerd() {
   var sheet = getActiveJournaal_();
@@ -122,7 +123,7 @@ function verwerkImport(tekst) {
 
     sheet.getRange(rijnummer, 1).setValue(code); // kolom A
     if (code === 200 && opmerking) {
-      sheet.getRange(rijnummer, 13).setValue(opmerking); // kolom M
+      sheet.getRange(rijnummer, 9).setValue(opmerking); // kolom I
     }
     verwerkt++;
   }
@@ -135,7 +136,7 @@ function verwerkImport(tekst) {
 }
 
 /**
- * Exporteert regels met toelichting in kolom M (correcties en opgeloste vraagposten).
+ * Exporteert regels met toelichting in kolom I (correcties en opgeloste vraagposten).
  * Toont per regel: rijnummer|code|omschrijving, naam|toelichting
  * Klaar om te plakken in /leer-codering voor het bijwerken van patronen.
  */
@@ -146,14 +147,14 @@ function exportGecodeerd() {
   var data = sheet.getDataRange().getValues();
   var regels = [];
 
-  for (var i = 3; i < data.length; i++) { // data begint op rij 4 (index 3)
-    var toelichting = data[i][12]; // kolom M
+  for (var i = 7; i < data.length; i++) { // data begint op rij 8 (index 7)
+    var toelichting = data[i][8]; // kolom I
     if (!toelichting || String(toelichting).trim() === "") continue;
 
     var rijnummer = i + 1;
     var code = data[i][0];        // kolom A
     var omschrijving = data[i][6]; // kolom G
-    var naam = data[i][8];        // kolom I
+    var naam = data[i][7];        // kolom H
 
     var delen = [];
     if (omschrijving) delen.push(String(omschrijving).trim());
@@ -163,7 +164,7 @@ function exportGecodeerd() {
   }
 
   if (regels.length === 0) {
-    SpreadsheetApp.getUi().alert("Geen regels met toelichting in kolom M gevonden in " + sheet.getName() + ".");
+    SpreadsheetApp.getUi().alert("Geen regels met toelichting in kolom I gevonden in " + sheet.getName() + ".");
     return;
   }
 
