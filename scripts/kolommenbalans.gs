@@ -14,6 +14,14 @@ var KB_BRONNEN = [
   'Memoriaal'
 ];
 
+// Bankrekeningen: deze codes vertegenwoordigen de bankrekening van een journaaltabblad.
+// Elke regel in dat tabblad is een transactie op die bankrekening, dus voor mutaties
+// gebruiken we SUM i.p.v. SUMIF (de code verschijnt niet in kolom A).
+var KB_BANK_CODES = {
+  '100': 'Journaal Wijkkas',
+  '120': 'Journaal Exploitatie'
+};
+
 // Tabblad voor beginbalans (zelfde kolomindeling: A=code, E=debet, F=credit)
 var KB_BEGINBALANS = 'Beginbalans';
 
@@ -160,11 +168,20 @@ function bouwKolommenbalans() {
         );
       }
 
-      // Mutaties (H, I): SUMIF over alle brontabbladen
+      // Mutaties (H, I): SUMIF over alle brontabbladen.
+      // Voor bankrekeningen: SUM over het eigen journaaltabblad (elke regel is een
+      // banktransactie), SUMIF voor de overige tabbladen (memoriaalcorrecties e.d.).
+      var bankTab = KB_BANK_CODES[item.code] || null;
       var sumifDebet = KB_BRONNEN.map(function(tab) {
+        if (bankTab && tab === bankTab) {
+          return "SUM('" + tab + "'!E8:E)";
+        }
         return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!E:E)";
       }).join('+');
       var sumifCredit = KB_BRONNEN.map(function(tab) {
+        if (bankTab && tab === bankTab) {
+          return "SUM('" + tab + "'!F8:F)";
+        }
         return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!F:F)";
       }).join('+');
 

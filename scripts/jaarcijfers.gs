@@ -20,6 +20,12 @@
 var JC_ALLE_TABS = ['Beginbalans', 'Journaal Wijkkas', 'Journaal Exploitatie', 'Memoriaal'];
 var JC_MUTATIE_TABS = ['Journaal Wijkkas', 'Journaal Exploitatie', 'Memoriaal'];
 
+// Bankrekeningen: SUM i.p.v. SUMIF voor het eigen journaaltabblad (zie kolommenbalans.gs)
+var JC_BANK_CODES = {
+  '100': 'Journaal Wijkkas',
+  '120': 'Journaal Exploitatie'
+};
+
 // Getalnotatie
 var JC_FMT = '_ [$\u20ac-2]\\ * #,##0.00_ ;_ [$\u20ac-2]\\ * \\-#,##0.00_ ;_ [$\u20ac-2]\\ * \\-??_ ;_ @_ ';
 
@@ -145,7 +151,8 @@ function bouwBalanspositie_(sheet, activa, passiva, overig, startRij) {
       sheet.getRange(r, 2).setFontWeight('bold');
 
       // Ultimo 2026: beginbalans + mutaties (netto debet)
-      sheet.getRange(r, 7).setFormula(netFormula_('A' + r, JC_ALLE_TABS, 'debet'));
+      var aBankTab = JC_BANK_CODES[String(a.code)] || null;
+      sheet.getRange(r, 7).setFormula(netFormula_('A' + r, JC_ALLE_TABS, 'debet', aBankTab));
       // Ultimo 2025: direct uit beginbalans
       sheet.getRange(r, 9).setFormula(bbFormula_('A' + r, 'debet'));
 
@@ -163,7 +170,8 @@ function bouwBalanspositie_(sheet, activa, passiva, overig, startRij) {
       sheet.getRange(r, 12).setFontWeight('bold');
 
       // Ultimo 2026: beginbalans + mutaties (netto credit)
-      sheet.getRange(r, 17).setFormula(netFormula_('K' + r, JC_ALLE_TABS, 'credit'));
+      var pBankTab = JC_BANK_CODES[String(p.code)] || null;
+      sheet.getRange(r, 17).setFormula(netFormula_('K' + r, JC_ALLE_TABS, 'credit', pBankTab));
       // Ultimo 2025: direct uit beginbalans
       sheet.getRange(r, 19).setFormula(bbFormula_('K' + r, 'credit'));
 
@@ -187,7 +195,8 @@ function bouwBalanspositie_(sheet, activa, passiva, overig, startRij) {
     sheet.getRange(r, 2).setFormula(naamFormula_('A' + r));
     sheet.getRange(r, 2).setFontWeight('bold');
 
-    sheet.getRange(r, 7).setFormula(netFormula_('A' + r, JC_ALLE_TABS, 'debet'));
+    var oBankTab = JC_BANK_CODES[String(o.code)] || null;
+    sheet.getRange(r, 7).setFormula(netFormula_('A' + r, JC_ALLE_TABS, 'debet', oBankTab));
     sheet.getRange(r, 7).setBackground('#c0c0c0');
     sheet.getRange(r, 9).setBackground('#c0c0c0');
   }
@@ -482,12 +491,17 @@ function bouwResultatenrekening_(sheet, lasten, baten, startRij) {
  * richting 'debet': E - F (positief = debet-saldo)
  * richting 'credit': F - E (positief = credit-saldo)
  */
-function netFormula_(codeCell, tabs, richting) {
+function netFormula_(codeCell, tabs, richting, bankTab) {
   var plus = richting === 'debet' ? 'E' : 'F';
   var min = richting === 'debet' ? 'F' : 'E';
 
   var parts = tabs.map(function(tab) {
     var t = tab.indexOf(' ') >= 0 ? "'" + tab + "'" : tab;
+    // Voor bankrekeningen: SUM over het eigen journaaltabblad i.p.v. SUMIF
+    if (bankTab && tab === bankTab) {
+      return 'SUM(' + t + '!' + plus + '8:' + plus + ')' +
+             '-SUM(' + t + '!' + min + '8:' + min + ')';
+    }
     return 'SUMIF(' + t + '!A:A;' + codeCell + ';' + t + '!' + plus + ':' + plus + ')' +
            '-SUMIF(' + t + '!A:A;' + codeCell + ';' + t + '!' + min + ':' + min + ')';
   });
