@@ -1,4 +1,3 @@
-10,Vaste activa,W,A
 30,Algemene kosten,W,L
 31,Kosten eredienst,W,L
 32,Kosten gemeenteactiviteiten,W,L
@@ -11,7 +10,6 @@
 71,Reservering Regenboogfonds,W,P
 72,Reservering Jongerenreis Bovenwijks,W,P
 73,Reservering Legaten,W,P
-80,Reserve decentraal onderhoud,E,P
 100,Bankrekeningen,W,A
 109,Ouderensoos,W,A
 110,Spaargelden,W,A
@@ -22,26 +20,21 @@
 122a,Bankrekening Morgenster,E,A
 122b,Bankrekening Regenboogkerk,E,A
 129,Spaargeld Centraal,E,A
-130,Buffetvoorraad,E,A
 140,Debiteuren,E,A
 140a,Debiteuren Morgenster,E,A
 140b,Debiteuren Regenboogkerk,E,A
-150w,Vorderingen,W,A
-150e,Vorderingen,E,A
-160w,Schulden,W,P
-160e,Schulden,E,P
+150,Vorderingen,W,A
+160,Schulden,W,P
 162,Te betalen kosten Lichtjestocht,W,P
 164,Reservering LAK,W,P
 165,Reservering Lichtjestocht,W,P
 170,Inkomsten collectebonnen,W,P
 171,Afdracht collectebonnen,W,A
-196,Verrekeningen,W,P
 197w,Saldo vorig jaar,W,P
 197e,Saldo vorig jaar,E,P
 198w,Sluitrekening exploitatie,W,A
 198e,Sluitrekening wijkkas,E,P
-199w,Kruisposten,W,X
-199e,Kruisposten,E,X
+199,Kruisposten,W,X
 200,Vraagposten,W,X
 210,Giften,W,B
 215,Doorzendgiften,W,B
