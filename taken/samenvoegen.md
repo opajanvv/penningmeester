@@ -80,37 +80,46 @@ Data begint op rij 8.
 - `.claude/commands/coderen-wijkkas.md`, `.claude/commands/coderen-exploitatie.md`
 - Code 198 uit `docs/referentie/coderingsschema.md`
 
-## Huidige status (2026-03-11)
+## Huidige status (2026-03-19)
 
-CSV-import, automatisch coderen en patronen bijwerken zijn gebouwd en getest voor beide rekeningen. Kolommenbalans-script is gebouwd en wordt fijngetuned.
+Alle scripts zijn gebouwd en getest. Jaarcijfers is het laatst bijgewerkt en wordt door Jan visueel gecontroleerd.
 
 ### Klaar
 - `scripts/import-csv.gs` — CSV-import per bestand, silent-mode, verplaatsen naar ingelezen
 - `scripts/codering.gs` — handmatige export/import functies (fallback)
 - `scripts/auto-codering.gs` — menu "Boekhouding" met CSV importeren + Patronen bijwerken
-- `scripts/kolommenbalans.gs` — bouwt Kolommenbalans op vanuit Grootboekschema (herhaaldbaar, getest en klaar)
+- `scripts/kolommenbalans.gs` — herlaadbaar, VLOOKUP voor namen, gridlines verborgen
+- `scripts/jaarcijfers.gs` — herlaadbaar, Balanspositie + Resultatenrekening, VLOOKUP voor namen, gridlines verborgen
 - Codering getest met Sonnet 4.6 (configureerbaar via Script Property `ANTHROPIC_MODEL`)
 - Patronen bijwerken getest en werkend
+- `grootboekschema.csv` uitgebreid met kolom D: zijde (A/P/B/L/X)
+- CLAUDE.md bijgewerkt met scriptarchitectuur en Apps Script conventies
 
-### In uitvoering
-- Beginbalans-tabblad invullen (handmatig, eindbalans vorig jaar)
+### Beginbalans-tabblad layout
+Het tabblad Beginbalans bevat twee secties:
+- **Beginbalans** (balanscodes): A=code, E=debet, F=credit
+- **Begroting/Jaar 2025** (V&W-codes): A=code, E=jaar 2025 lasten, F=jaar 2025 baten, G=spacer, H=begroting lasten, I=begroting baten
+
+Jaarcijfers haalt Ultimo 2025 (balans) via SUMIF op E/F, begroting via SUMIF op H/I, jaar 2025 (V&W) via SUMIF op E/F. Geen overlap omdat balans- en V&W-codes disjunct zijn.
 
 ### Geleerde lessen Apps Script
 - `setFormula()`: Engelse functienamen + puntkomma's als scheidingsteken (NL-locale)
 - `setNumberFormat()`: altijd internationale notatie (punt=decimaal, komma=duizendtal)
 - `getNumberFormat()` op een bestaande cel gebruiken om het exacte formaat te achterhalen
 - Folder-ID's hardcoded in constanten (Script Properties werkten niet)
+- Codes uit Grootboekschema overnemen met origineel datatype (`gsData[i][0]`), niet converteren naar String — anders falen VLOOKUP/SUMIF op puur numerieke codes (zoals 196)
 
 ## Nog te doen
 
-1. **Beginbalans** invullen (apart tabblad, handmatig vanuit eindbalans vorig jaar)
-2. **Memoriaal** vullen — correcties, handmatige boekingen
-3. **Kas en Verhuur/Buffet** inrichten (tellen later mee in Kolommenbalans via KB_BRONNEN)
-4. **Jaarcijfers** — rapportage-tabblad opzetten
-4. **Documentatie bijwerken**:
+1. **Beginbalans** invullen (handmatig vanuit eindbalans vorig jaar)
+2. **Begroting + Jaar 2025** invullen in Beginbalans-tabblad (handmatig)
+3. **Memoriaal** vullen — correcties, handmatige boekingen
+4. **Kas en Verhuur/Buffet** inrichten (tellen mee in Kolommenbalans via KB_BRONNEN)
+5. **Ongebruikte codes** verwijderen uit Grootboekschema (Jan bepaalt welke)
+6. **Documentatie bijwerken**:
    - `docs/technisch/ontwerp-boekhouding-2026.md` — definitieve structuur
    - `docs/technisch/csv-import-script.md` — schrijft naar Journaal i.p.v. SKG
    - `docs/processen/bankafschriften-importeren.md` — geen SKG-tabbladen meer
-   - Kolommenbalans-formules documenteren
-5. **Committen en mergen** naar main
-6. **Oude sheets** archiveren
+   - Kolommenbalans- en Jaarcijfers-formules documenteren
+7. **Committen en mergen** naar main
+8. **Oude sheets** archiveren
