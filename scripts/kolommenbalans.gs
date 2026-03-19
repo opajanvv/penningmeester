@@ -169,20 +169,25 @@ function bouwKolommenbalans() {
       }
 
       // Mutaties (H, I): SUMIF over alle brontabbladen.
-      // Voor bankrekeningen: SUM over het eigen journaaltabblad (elke regel is een
-      // banktransactie), SUMIF voor de overige tabbladen (memoriaalcorrecties e.d.).
+      // Voor bankrekeningen (single-entry): SUM over het eigen journaaltabblad.
+      //   Bij (E) = geld komt in = bankrekening Debet.
+      //   Af  (F) = geld gaat uit = bankrekening Credit.
+      // Voor tegenrekeningen: E en F omgewisseld t.o.v. de bank, zodat dubbel boekhouden
+      // klopt en de Mutaties-check altijd 0 is:
+      //   Af  (F) → Debet  (kosten/schulden gedebiteerd bij betaling)
+      //   Bij (E) → Credit (baten/vorderingen gecrediteerd bij ontvangst)
       var bankTab = KB_BANK_CODES[item.code] || null;
       var sumifDebet = KB_BRONNEN.map(function(tab) {
         if (bankTab && tab === bankTab) {
           return "SUM('" + tab + "'!E8:E)";
         }
-        return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!E:E)";
+        return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!F:F)";
       }).join('+');
       var sumifCredit = KB_BRONNEN.map(function(tab) {
         if (bankTab && tab === bankTab) {
           return "SUM('" + tab + "'!F8:F)";
         }
-        return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!F:F)";
+        return "SUMIF('" + tab + "'!A:A;A" + r + ";'" + tab + "'!E:E)";
       }).join('+');
 
       sheet.getRange(r, 8).setFormula('=' + sumifDebet);
