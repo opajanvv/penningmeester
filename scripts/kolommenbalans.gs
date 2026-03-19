@@ -58,27 +58,32 @@ function bouwKolommenbalans() {
   }
 
   var gsData = gsSheet.getDataRange().getValues();
-  // Verwacht kolom A=code, B=naam. Skip header.
+  // Verwacht kolom A=code, B=naam, C=bron, D=zijde. Skip header.
   var codes = [];
   for (var i = 1; i < gsData.length; i++) {
     var code = gsData[i][0];
     if (code === '' || code === null) continue;
     codes.push({
       code: String(code).trim(),
-      naam: String(gsData[i][1] || '').trim()
+      naam: String(gsData[i][1] || '').trim(),
+      zijde: String(gsData[i][3] || '').trim()
     });
   }
 
-  // Bepaal type (Balans of V&W) op basis van codenummer
+  // Bepaal type (Balans of V&W) op basis van zijde uit het Grootboekschema.
+  // A (Activa) en P (Passiva) zijn balansrekeningen.
+  // B (Baten) en L (Lasten) zijn V&W-rekeningen.
+  // X (Kruisposten) en overig: op basis van codenummer (≤200 = Balans).
   codes.forEach(function(c) {
     var num = parseInt(c.code, 10);
-    if (isNaN(num)) {
+    c.num = isNaN(num) ? 0 : num;
+    if (c.zijde === 'A' || c.zijde === 'P') {
       c.type = 'Balans';
-      c.num = 0;
+    } else if (c.zijde === 'B' || c.zijde === 'L') {
+      c.type = 'V&W';
     } else {
-      c.num = num;
-      // Balansrekeningen: 0-209 (incl kruisposten 199, vraagposten 200)
-      c.type = num <= 200 ? 'Balans' : 'V&W';
+      // X (kruisposten), onbekend: op basis van codenummer
+      c.type = c.num <= 200 ? 'Balans' : 'V&W';
     }
   });
 
