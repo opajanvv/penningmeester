@@ -1,0 +1,141 @@
+10,Vaste activa,W,A
+30,Algemene kosten,W,L
+31,Kosten eredienst,W,L
+32,Kosten gemeenteactiviteiten,W,L
+33,Kosten ouderenwerk,W,L
+34,Kosten jongerenwerk,W,L
+36,Overige kosten,W,L
+50,Algemene wijkreserve,W,P
+60,Wijkfonds,W,P
+70,Wijkreserve Bestemd,W,P
+71,Reservering Regenboogfonds,W,P
+72,Reservering Jongerenreis Bovenwijks,W,P
+73,Reservering Legaten,W,P
+80,Reserve decentraal onderhoud,E,P
+100,Bankrekeningen,W,A
+109,Ouderensoos,W,A
+110,Spaargelden,W,A
+120,Bankrekeningen,E,A
+121,Kas beheerder/koster,E,A
+121a,Kas Morgenster,E,A
+121b,Kas Regenboogkerk,E,A
+122a,Bankrekening Morgenster,E,A
+122b,Bankrekening Regenboogkerk,E,A
+129,Spaargeld Centraal,E,A
+130,Buffetvoorraad,E,A
+140,Debiteuren,E,A
+140a,Debiteuren Morgenster,E,A
+140b,Debiteuren Regenboogkerk,E,A
+150w,Vorderingen,W,A
+150e,Vorderingen,E,A
+160w,Schulden,W,P
+160e,Schulden,E,P
+162,Te betalen kosten Lichtjestocht,W,P
+164,Reservering LAK,W,P
+165,Reservering Lichtjestocht,W,P
+170,Inkomsten collectebonnen,W,P
+171,Afdracht collectebonnen,W,A
+196,Verrekeningen,W,P
+197w,Saldo vorig jaar,W,P
+197e,Saldo vorig jaar,E,P
+198w,Sluitrekening exploitatie,W,A
+198e,Sluitrekening wijkkas,E,P
+199w,Kruisposten,W,X
+199e,Kruisposten,E,X
+200,Vraagposten,W,X
+210,Giften,W,B
+215,Doorzendgiften,W,B
+220,Collecten,W,B
+225,Doorzendcollecten,W,A
+230,Verjaardagsfonds,W,B
+240,Rente,W,B
+265,Subsidies Kerktuin,W,B
+290,Overige baten,W,B
+300,Wijkkerkenraad,W,L
+301,Scribaat,W,L
+302,Drukwerk,W,L
+303,Abonnementen,W,L
+304,Kosten vrijwilligers,W,L
+305,Bankkosten,W,L
+306,Administratie,W,L
+307,Internet en website,W,L
+308,Kosterij,W,L
+309,Overige kosten,W,L
+310,Werkgroep eredienst,W,L
+311,Kosten eredienst,W,L
+312,Cantorij en koren,W,L
+313,Koffie na de dienst,W,L
+314,Kerktelefoon/televisie,W,L
+315,Exposities,W,L
+316,"Doop, belijdenis, spec. dienst",W,L
+319,Overige kosten eredienst,W,L
+320,Vorming en toerusting,W,L
+321,Gemeenteavonden,W,L
+322,Gemeenteweekenden,W,L
+323,Concerten / Lichtjestocht,W,L
+324,Contacten met derden,W,L
+325,Alpha cursussen,W,L
+329,Overige kosten gemeente-activiteiten,W,L
+330,Contactmiddagen/soos,W,L
+331,Uitstapjes,W,L
+332,Maaltijden,W,L
+333,Attenties bij verjaardagen,W,L
+334,Kerstattenties,W,L
+339,Overige kosten ouderenwerk,W,L
+340,Catechese,W,L
+341,Jongerendiensten,W,L
+342,Buitenevenementen,W,L
+343,Culturele evenementen,W,L
+344,Koren,W,L
+349,Overige kosten jongerenwerk,W,L
+350,Vitamine G,W,L
+356,Evangelisatiecommissie,W,L
+357,Zendingscommissie,W,L
+360,Diverse kosten,W,L
+364,Kopieermachine,W,L
+365,Kerktuin,W,L
+370,Paaskaars,W,L
+392,Kerkbalans (naar PgH),W,L
+400,Verhuur op rekening,E,B
+401,Verhuur contant,E,B
+402,Wijkkas naar PgH,W,L
+404,Verhuur ruimte pedicure,E,B
+407,Kerststal,W,L
+410,Buffet op rekening,E,B
+411,Buffet contant,E,B
+412,Buffet PIN,E,B
+420,Verhuur apparatuur,E,B
+421,Verhuur muziekinstrumenten,E,B
+428,Opbrengst bazar,E,B
+429,Overige baten,E,B
+430,Bankrente,E,B
+450,Inkoop buffet,E,L
+455,Afrekening personeelskosten koster,E,L
+459,Overige kosten buffet,E,L
+460,Schoonmaakbedrijf,E,L
+470,Onderhoud vleugel/piano,E,L
+480,Bankkosten,E,L
+481,Kantoorartikelen,E,L
+482,Vergoeding vrijwilligers,E,L
+489,Overige kosten,E,L
+500,Jaarbijdrage,E,B
+509,Jaarsaldo,E,B
+550,Verwarming,E,L
+551,Electra,E,L
+552,Noodverlichting,E,L
+553,Klokken,E,L
+559,Overige kosten installaties,E,L
+560,Schoonhouden,E,L
+561,Glasbewassing,E,L
+562,Vuilafvoer,E,L
+563,Planten,E,L
+569,Overige kosten interieur,E,L
+570,Periodieke vervanging,E,L
+571,Reparaties,E,L
+572,Blus- en verbandmiddelen,E,L
+573,Aanschaf keukenapparatuur,E,L
+574,Kleine aanschaffingen,E,L
+579,Overige kosten inventaris,E,L
+580,Uitbesteed werk,E,L
+589,Overige kosten tuin,E,L
+600,Kosten parkeervoorziening,E,L

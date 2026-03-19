@@ -40,6 +40,7 @@ function bouwKolommenbalans() {
   // Leegmaken
   sheet.clear();
   sheet.clearFormats();
+  sheet.setHiddenGridlines(true);
 
   // Haal codes op uit Grootboekschema
   var gsSheet = ss.getSheetByName('Grootboekschema');
@@ -141,7 +142,8 @@ function bouwKolommenbalans() {
 
       // A: Rekening, B: Naam, D: Type
       sheet.getRange(r, 1).setValue(item.code);
-      sheet.getRange(r, 2).setValue(item.naam);
+      sheet.getRange(r, 2).setFormula('=IFERROR(VLOOKUP(A' + r + ';Grootboekschema!A:B;2;FALSE);"")');
+
       sheet.getRange(r, 4).setValue(item.type);
 
       // Bold voor code en naam, code rechts uitlijnen
@@ -191,13 +193,13 @@ function bouwKolommenbalans() {
 
       // Grijze achtergrond alleen voor kolommen met formules
       if (item.type === 'Balans') {
-        sheet.getRange(r, 5, 1, 2).setBackground('#f5f5f5');   // Beginbalans
-        sheet.getRange(r, 17, 1, 2).setBackground('#f5f5f5');  // Eindbalans
+        sheet.getRange(r, 5, 1, 2).setBackground('#c0c0c0');   // Beginbalans
+        sheet.getRange(r, 17, 1, 2).setBackground('#c0c0c0');  // Eindbalans
       } else {
-        sheet.getRange(r, 14, 1, 2).setBackground('#f5f5f5');  // V&W
+        sheet.getRange(r, 14, 1, 2).setBackground('#c0c0c0');  // V&W
       }
-      sheet.getRange(r, 8, 1, 2).setBackground('#f5f5f5');     // Mutaties (altijd)
-      sheet.getRange(r, 11, 1, 2).setBackground('#f5f5f5');    // Proefbalans (altijd)
+      sheet.getRange(r, 8, 1, 2).setBackground('#c0c0c0');     // Mutaties (altijd)
+      sheet.getRange(r, 11, 1, 2).setBackground('#c0c0c0');    // Proefbalans (altijd)
 
       rij++;
     }

@@ -1,4 +1,6 @@
-# Project: penningmeester-documentatie
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Taal
 
@@ -59,10 +61,39 @@ Dit project heeft 7 commands in `.claude/commands/`. Ze vallen in drie groepen:
 ## Sheet-referenties
 
 - **Sheet**: Boekhouding 2026 (samenvoeging wijkkas + exploitatie)
-- **Tabbladen**: SKG Wijkkas, SKG Exploitatie, Journaal, Kolommenbalans, Jaarcijfers, Kas, Verhuur&Buffet
+- **Tabbladen**: Journaal Wijkkas, Journaal Exploitatie, Memoriaal, Beginbalans, Grootboekschema, Kolommenbalans, Jaarcijfers, Kas, Verhuur&Buffet
 - **Lokale exports**: `taken/bronnen/` -- Jan exporteert als een taak inzicht in de sheet vereist
 
-## Scripts
+## Grootboekschema
+
+- `grootboekschema.csv` is de bron van waarheid voor alle grootboekcodes. Formaat: `code,naam,bron,zijde`
+- **bron**: `W` = wijkkas, `E` = exploitatie
+- **zijde**: `A` = activa, `P` = passiva, `B` = baten, `L` = lasten, `X` = kruisposten/vraagposten
+- Codes 30-36 zijn groepskoppen (L met num < 100) en worden overgeslagen in Kolommenbalans en Jaarcijfers
+- Volledige documentatie van codes en hun betekenis: `docs/referentie/coderingsschema.md`
+
+## Scripts (Google Apps Script)
+
+Alle scripts staan in `scripts/` en draaien in de Google Apps Script-editor van de Boekhouding 2026 sheet.
+
+### Architectuur
+
+```
+import-csv.gs          CSV-bestanden uit Google Drive importeren naar journaaltabbladen
+auto-codering.gs       Menu (onOpen), importeren + auto-coderen via Anthropic API
+codering.gs            Export/import van codes voor handmatige codering via /coderen
+kolommenbalans.gs      Kolommenbalans opbouwen vanuit Grootboekschema + journaaltabbladen
+jaarcijfers.gs         Jaarcijfers (balans + resultatenrekening) opbouwen
+```
+
+### Conventies
 
 - Bij nieuwe scripts: gebruik configuratie (Script Properties, env vars) voor IDs en paden vanaf het begin, niet hardcoded waarden.
 - Name-masking is niet meer actief. Namen gaan ongemaskeerd naar Claude (nodig voor correcte codering).
+- Data in journaaltabbladen begint op **rij 8** (niet 10).
+- `setFormula()`: gebruik Engelse functienamen + puntkomma's als scheidingsteken (NL-locale in Google Sheets).
+- `setNumberFormat()`: altijd internationale notatie (punt=decimaal, komma=duizendtal).
+- Euro-format: `_ [$€-2]\ * #,##0.00_ ;_ [$€-2]\ * \-#,##0.00_ ;_ [$€-2]\ * \-??_ ;_ @_ `
+- Codes uit Grootboekschema: neem het originele datatype over (`gsData[i][0]`), niet converteren naar String. Puur numerieke codes (zoals 196) worden anders tekst en matchen niet meer in VLOOKUP/SUMIF.
+- Kolommenbalans en Jaarcijfers zijn herlaadbaar: ze maken het tabblad eerst leeg en bouwen het opnieuw op.
+- Grootboeknamen in Kolommenbalans en Jaarcijfers zijn VLOOKUP-formules naar het Grootboekschema, geen hardcoded tekst.
